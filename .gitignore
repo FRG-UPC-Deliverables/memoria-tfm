@@ -1,0 +1,12 @@
+// 
+*.swp
+*.log
+
+
+// 
+.vim/
+
+
+// Generated
+output/*
+!output/.empty
