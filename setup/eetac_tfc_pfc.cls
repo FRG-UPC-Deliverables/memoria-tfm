@@ -206,9 +206,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newlength{\logoEPSCheight}   
-\setlength{\logoEPSCheight}{1.5cm}
-\newsavebox{\logoEPSC}
-\sbox{\logoEPSC}{\includegraphics[totalheight=\logoEPSCheight]{./setup/EETAC-positiu-negre}}
+%\setlength{\logoEPSCheight}{1.5cm}
+%\newsavebox{\logoEPSC}
+%\sbox{\logoEPSC}{\includegraphics[totalheight=\logoEPSCheight]{./setup/EETAC-positiu-negre}}
 
 \newcommand{\mylogo}[2]{ 
   \newlength{\logoheight} 
@@ -293,11 +293,8 @@
     \renewcommand{\and}{\\ \hspace*{\Lautors}}
 
   \begin{tabular}{p{\textwidth}}
-    \ifthenelse{\boolean{logo}}{\usebox{\logoEPSC}  \hfill \usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
-    \ifthenelse{\boolean{PFC}}{\begin{center}\Huge\sffamily\bfseries  PROJECTE DE FI DE CARRERA \end{center}  \\[5cm]}
-                              %{\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE CARRERA  \end{center}  \\[5cm]}
-                              % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-                              {\begin{center}\Huge\sffamily\bfseries  TREBALL DE FI DE GRAU  \end{center}  \\[5cm]}
+    \ifthenelse{\boolean{logo}}{\usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
+    \begin{center}\Huge\sffamily\bfseries  MASTER THESIS \end{center}  \\[5cm]
                               
     \fbox{\parbox{\textwidth}{
         \vspace{2ex}

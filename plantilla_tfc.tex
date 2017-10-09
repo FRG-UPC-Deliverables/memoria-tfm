@@ -31,7 +31,7 @@
 % 1- INICIALITZACIÓ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[catalan,final]{setup/eetac_tfc_pfc}
+\documentclass[english,final]{setup/eetac_tfc_pfc}
 %% * OPCIONS A CONFIGURAR al \documentclass
 %%    - Estat del document: final o draft
 %%      NOTA: Draft no inserta les figures i marca només l'espai que
@@ -40,7 +40,7 @@
 %%      en aquell moment visualitzar les figures.
 %%    - Idioma PRINCIPAL del document: catalan, spanish, english, french...
 
-\usepackage[english,catalan]{babel}
+\usepackage[english]{babel}
 %%  * INCLOURE TOTS ELS IDIOMES QUE S'USARAN EN EL DOCUMENT
 %%    NOTA: per canviar d'idioma al mig del document usar:
 %%          \selectlanguage{nom_idioma}
@@ -62,7 +62,7 @@
 \usepackage[utf8]{inputenc}
 
 %% Símbols matemàtics de la American Mathematical Society
-\usepackage{amssymb,amsmath, amsfonts}  
+\usepackage{amssymb, amsmath, amsfonts}  
 
 %% El paquet array proporciona eines molt útils a l'hora de fer 
 %% equacions amb matrius
@@ -81,13 +81,11 @@
 %% Paquet molt útil que permet activar links en el PDF final.
 %% * NO OBLIDAR DE CONFIGURAR els quatre primer camps!
 \usepackage[
-  pdfauthor={Nom Cognoms autor},            % Configurar adientment
-  %pdftitle={Treball Fi de Carrera - autor}, % Configurar adientment
-  %pdfsubject={Titol del TFC aqui},          % Configurar adientment
+  pdfauthor={Fernando Román García},
   % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-  pdftitle={Treball Fi de Grau - autor}, % Configurar adientment
-  pdfsubject={Titol del TFG aqui},          % Configurar adientment  
-  pdfkeywords={keyword1, keyword2, ...},    % Configurar adientment
+  pdftitle={Treball Fi de Grau - autor},    % TODO
+  pdfsubject={Titol del TFG aqui},          % TODO
+  pdfkeywords={keyword1, keyword2, ...},    % TODO
   pdfcreator={EETAC-UPC}, 
   pdfproducer={LaTeX, dvipdf},
   pdfdisplaydoctitle=true, plainpages=false, linktocpage=true,         
@@ -133,7 +131,7 @@
 \begin{document}
 
 %% Seleccionar l'idioma principal del document:
-\selectlanguage{catalan}
+\selectlanguage{english}
 
 \beforepreface  
 
@@ -144,19 +142,15 @@
 %        ocupi tota la pàgina. 
 
 %%% Resum en català (o castellà)
-\selectlanguage{catalan}   
-\begin{resum}{10cm}
-  Aquest document conté les pautes del format de presentació del treball o projecte de final de carrera. En tot cas, cal tenir en compte el que estableix la ``Normativa del treball de fi de carrera (TFC) i del projecte de fi de carrera (PFC)'' aprovada per la Comissió Permanent de l'EETAC, especialment l'apartat ``Requeriments del treball''.
-\end{resum}
+%\begin{resum}{10cm}
+%  Aquest document conté les pautes del format de presentació del treball o projecte de %final de carrera. En tot cas, cal tenir en compte el que estableix la ``Normativa del %treball de fi de carrera (TFC) i del projecte de fi de carrera (PFC)'' aprovada per la %Comissió Permanent de l'EETAC, especialment l'apartat ``Requeriments del treball''.
+%\end{resum}
 
 %%% Resum en anglès
-\selectlanguage{english}   
 \begin{overview}{11cm}
   This document contains guidelines for writing your TFC/PFC. However, you should also take into consideration the standards established in the document Normativa del treball de fi de carrera (TFC) i del projecte de fi de carrera (PFC), paying special attention to the section Requeriments del treball, as this document has been approved by the EETAC Standing Committee
 \end{overview}
 
-% Tornar a l'idioma principal del document
-\selectlanguage{catalan}  
 
 %NOTA: En cas d'utilitzar l'espanyol com a idioma principal del document, el
 %      latex anomena les taules com a 'Cuadros'. Si es desitja canviar aquesta
@@ -186,11 +180,13 @@
 % NOTA: Si es vol incloure agraïments i/o glosari, fer-ho utilitzant 
 % \chapter*{} i incloure'ls abans la introducció
 
-\input{chapters/introduccio}
-\input{chapters/compaginacio}
-\input{chapters/organitzacio}
+\input{chapters/introduction}
+\input{chapters/digital-forensics}
+\input{chapters/cp-development}
+\input{chapters/sw-architecture}
+\input{chapters/img-spy}
+%\input{chapters/organitzacio}
 \input{chapters/conclusions}
-
 
 %%%  BIBLIOGRAFIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
