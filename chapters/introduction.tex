@@ -12,7 +12,7 @@ what it's owner has done at a specific moment.
 Digital forensics science, or digital forensics, is defined as:
 
 \begin{quote}
-"the use of scientifically derived and proven methods toward the preservation,
+"The use of scientifically derived and proven methods toward the preservation,
 collection, validation, identification, analysis, interpretation,
 documentation, and presentation of digital evidence derived from digital
 sources for the purpose of facilitation or furthering the reconstruction of
@@ -20,50 +20,63 @@ events found to be criminal, or helping to anticipate unauthorized actions
 shown to be disruptive to planned operations" \cite{DFRWS-df-road-map}
 \end{quote}
 
-In several cases, when a search warrant is given to investigators, they can 
-proceed with the analysis of a suspect's digital data source, mainly hard disks
-(HDD).
+In several cases, when a search warrant is given to investigators, they can
+proceed with the acquisition and analysis of a suspect's digital data source,
+for instance, hard disks (HDD). Using this information, they can look for
+evidences that prove the suspect's innocence or guiltiness.
 
-This procedure consists, as described before on:
+There are many ways to do this analysis but the more generic one presented in
+\cite{ds-phases} consists in:
 
 \begin{description}
-	\item [Attribution]
-		Meta data and other logs can be used to attribute actions to an
-		individual. 
-		
-		For example, personal documents on a computer drive might
-		identify its owner.
-	\item [Alibis and statements]
-		Information provided by those involved can be cross checked
-		with digital evidence.
-		
-		For example, during the investigation into the Soham murders
-		the offender's alibi was disproved when mobile phone records of
-		the person he 	claimed to be with showed she was out of town
-		at the time.
-	\item [Intent]
-		As well as finding objective evidence of a crime being
-		committed, investigations can also be used to prove the intent
-		(known by the legal term mens rea).
-		
-		For example, the Internet history of convicted killer Neil
-		Entwistle included references to a site discussing How to kill
-		people.
-	\item [Evaluation of source]
-		File artifacts and meta-data can be used to identify the origin
-		of a particular piece of data; for example, older versions of
-		Microsoft Word embedded a Global Unique Identifer into files
-		which identified the computer it had been created on.  Proving
-		whether a file was produced on the digital device being
-		examined or obtained from elsewhere (e.g., the Internet) can be
-		very important.[3]
-	\item [Document authentication]
-		Related to "Evaluation of source," meta data associated with
-		digital documents can be easily modified (for example, by
-		changing the computer clock you can affect the creation date of
-		a file). Document authentication relates to detecting and
-		identifying falsification of such details.
+	\item [Pre-Process]
+		Even sometimes this step could be forgotten, is one of the more
+		important. It consists in all the works needed to be done before
+		the collection of data. To have all the approvals for relevant
+		authorities is considered here.
+
+	\item [Acquisition \& Preservation]
+		Once everything is prepared, now investigator can acquire the
+		data. An image and a hash of the image have to be computed. The
+		image is an exact copy of the data and the hash is a small piece
+		of information that summarizes the image.
+
+		That way, if anyone modifies the image and the hash is computed
+		again, a different value will be retrieved. So this procedure
+		stands to guarantee the proof integrity.
+
+	\item [Analysis]
+		Is the main phase of the investigation. It consists on extract
+		the relevant information acquired before. Many different 
+		techniques can be used: data recovery, words lookup, etc. Note
+		that, on this step, many different tools may be used to be able
+		to perform a proper analysis.
+
+	\item [Presentation]
+		A good analysis is useless if it's not presented in a easy to 
+		understand manner. After this phase, the innocence of the
+		suspect has to be proved or refused.
+
+	\item [Post-Process]
+		Physical (i.e. HDD) and digital proofs have to be returned and
+		a document must be written to finish the case.
 \end{description}
 
-The objective of this document is to explain 
+There are many digital forensics analysis tools but most of them are not
+supported on all the operative systems. A very complete software is 
+\textbf{EnCase Forensic} \cite{encase-web}. It has a lot of tools that can be 
+used from the acquisition step until the final report. But it's main 
+disadvantage is that is not open source.
+
+Another well known software regarding digital forensics is \textbf{The Sleuth
+Kit} \cite{tsk-web}. This open source cross-platform toolkit is a collection 
+of terminal applications and a C library that allows you to analyze disk images 
+and recover files from them. The Sleuth Kit team also developed
+\textbf{Autopsy}, with is a windows user interface to efficiently analyze hard 
+drives and smart phones.
+
+Due to the lack of open source cross-platform tools with user interface, the
+objective of this project develop one with main functionalities. The start point
+is to use \textbf{The Sleuth Kit}'s C library since it's cross-platform and a 
+very mature project.
 
