@@ -81,25 +81,32 @@
 %% Paquet molt útil que permet activar links en el PDF final.
 %% * NO OBLIDAR DE CONFIGURAR els quatre primer camps!
 \usepackage[
-  pdfauthor={Fernando Román García},
-  % Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-  pdftitle={Treball Fi de Grau - autor},    % TODO
-  pdfsubject={Titol del TFG aqui},          % TODO
-  pdfkeywords={keyword1, keyword2, ...},    % TODO
-  pdfcreator={EETAC-UPC}, 
-  pdfproducer={LaTeX, dvipdf},
-  pdfdisplaydoctitle=true, plainpages=false, linktocpage=true,         
-  colorlinks=true, linkcolor=blue,citecolor=blue,urlcolor=blue,
-  hyperfootnotes=false, pagebackref=true, pdfpagelabels=true,
-  pdfpagemode=UseOutlines,
+	pdfauthor={Fernando Román García},
+  	% Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
+  	pdftitle={Treball Fi de Grau - autor}, 		% TODO
+	pdfsubject={Titol del TFG aqui},       		% TODO
+	pdfkeywords={keyword1, keyword2, ...},    	% TODO
+  	pdfcreator={EETAC-UPC},
+	pdfproducer={LaTeX, dvipdf},
+	pdfdisplaydoctitle=true,
+  	plainpages=false,
+	linktocpage=true,
+	colorlinks=true,
+  	linkcolor=blue,
+	citecolor=blue,
+	urlcolor=blue,
+	hyperfootnotes=false,
+  	pagebackref=true,
+	pdfpagelabels=true,
+	pdfpagemode=UseOutlines,
 ]{hyperref} 
 
 %% NOTA IMPORTANT!:
 %% Per tal que hyperef funcioni correctament amb els capitols o seccions no
-%% numerats (\chapter*{}), com per exemple introducció, conclusions i bibliografia
-%% cal posar les dues comandes seguents ABANS del \chapter*{} en questió
-%\cleardoublepage
-%\phantomsection
+%% numerats (\chapter*{}), com per exemple introducció, conclusions i
+%% bibliografia cal posar les dues comandes seguents ABANS del \chapter*{} en
+%% questió
+%\cleardoublepage \phantomsection
 
 %% Permet trencar links URL. 
 %% Atenció! afegir aquest paquet DESPRES del hyperref!!
@@ -137,31 +144,34 @@
 
 %% RESUM i OVERVIEW
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% NOTA: les longituds passades com a parametres d'entrada  s'han
-%        d'ajustar manualment fins que el requadre del resum/overview
-%        ocupi tota la pàgina. 
+% NOTA: les longituds passades com a parametres d'entrada  s'han d'ajustar
+% manualment fins que el requadre del resum/overview ocupi tota la pàgina. 
 
 %%% Resum en català (o castellà)
-%\begin{resum}{10cm}
-%  Aquest document conté les pautes del format de presentació del treball o projecte de %final de carrera. En tot cas, cal tenir en compte el que estableix la ``Normativa del %treball de fi de carrera (TFC) i del projecte de fi de carrera (PFC)'' aprovada per la %Comissió Permanent de l'EETAC, especialment l'apartat ``Requeriments del treball''.
-%\end{resum}
+%\begin{resum}{10cm} Aquest document conté les pautes del format de presentació
+%del treball o projecte de %final de carrera. En tot cas, cal tenir en compte
+%el que estableix la ``Normativa del %treball de fi de carrera (TFC) i del
+%projecte de fi de carrera (PFC)'' aprovada per la %Comissió Permanent de
+%l'EETAC, especialment l'apartat ``Requeriments del treball''.  \end{resum}
 
 %%% Resum en anglès
-\begin{overview}{11cm}
-  This document contains guidelines for writing your TFC/PFC. However, you should also take into consideration the standards established in the document Normativa del treball de fi de carrera (TFC) i del projecte de fi de carrera (PFC), paying special attention to the section Requeriments del treball, as this document has been approved by the EETAC Standing Committee
-\end{overview}
+\begin{overview}{11cm} This document contains guidelines for writing your
+TFC/PFC. However, you should also take into consideration the standards
+established in the document Normativa del treball de fi de carrera (TFC) i del
+projecte de fi de carrera (PFC), paying special attention to the section
+Requeriments del treball, as this document has been approved by the EETAC
+Standing Committee \end{overview}
 
 
 %NOTA: En cas d'utilitzar l'espanyol com a idioma principal del document, el
-%      latex anomena les taules com a 'Cuadros'. Si es desitja canviar aquesta
-%      nomenclatura i utilitzar la paraula 'Tabla' descomentar les línies següents:
-%\def\listtablename{Índice de tablas}
-%\def\tablename{Tabla}%
+%latex anomena les taules com a 'Cuadros'. Si es desitja canviar aquesta
+%nomenclatura i utilitzar la paraula 'Tabla' descomentar les línies següents:
+%\def\listtablename{Índice de tablas} \def\tablename{Tabla}%
 
 
 
-% Amb aqueta comanda indiquem que ja s'han inclòs tots els apartats del prefaci del 
-% projecte o podem començar a incloure els capitols de la memòria
+% Amb aqueta comanda indiquem que ja s'han inclòs tots els apartats del prefaci
+% del projecte o podem començar a incloure els capitols de la memòria
 \afterpreface
 
 
@@ -170,14 +180,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % NOTA: recordar que la introducció i les conclusions són capítols NO
-%       enumerats, per tant s'ha d'usar \chapter*
+% enumerats, per tant s'ha d'usar \chapter*
 
-% NOTA: és aconsellable incloure els capítols de la memòria en fitxers 
-%       separats utlitzant la comanda \input  Per exemple:
-%       \input{capitol1}  
-%       que farà que s'inclogui el fitxer capitol1.tex
+% NOTA: és aconsellable incloure els capítols de la memòria en fitxers separats
+% utlitzant la comanda \input  Per exemple: \input{capitol1}  que farà que
+% s'inclogui el fitxer capitol1.tex
 
-% NOTA: Si es vol incloure agraïments i/o glosari, fer-ho utilitzant 
+% NOTA: Si es vol incloure agraïments i/o glosari, fer-ho utilitzant
 % \chapter*{} i incloure'ls abans la introducció
 
 \input{chapters/introduction}
@@ -191,42 +200,7 @@
 %%%  BIBLIOGRAFIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Per la bibliografia hi ha 2 opcions: generarla amb la utilitat BibTeX 
-%%%                                      o fer-la ''a ma''
-%%% NOTA: podeu trobar facilment informació sobre BibTeX a:
-%%%  http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
-
-%%% OPCIO 1: BibTeX (recomanat) -> descomentar les comandes seguents:
-%\bibliographystyle{unsrt}   %% Estil de bibliografia EETAC
-%\cleardoublepage
-%\phantomsection
-% Indicar aqui el(s) fitxer(s) que contenen la bibliografia
-%\bibliography{fitxer1,...,fitxerN}  
-%\pdfbookmark{Bibliografia}{sec:biblio}
-
-%%% OPCIO 2: bibliografia manual
-%%%
-%%% L'argument d'entrada es el numero de referencies que s'inclouen
-\cleardoublepage
-\phantomsection
-\begin{thebibliography}{2}
-
-%% Llibres:  Autor/s (cognoms i inicials dels noms), títol del llibre (en cursiva), editor, ciutat i any de publicació. Quan es cita el capítol d'un llibre s'ha d'indicar el títol del capítol (entre cometes), el títol del llibre (en cursiva) i els números de pàgines amb la primera i la darrera incloses.
-
-%%  Exemple de capitol en llibre
-\bibitem{prova1} 
-Cognoms-autor, Inicial-nom.
-``Títol del capítol''. {\it Títol del llibre}.
-(Editor. Ciutat. Any publicació): pagina1--paginaN.
-
-%%  Exemple de d'article en revista
-\bibitem{prova2} 
-Cognoms-autor, Inicial-nom.
-``Títol de l'article''. {\it Títol de la revista}.
-{\bf volum}(numero),
-pagina1--paginaN. (Any publicació) 
-
-\end{thebibliography}
+\input{bibliography/bibliography}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%                           APENDIXS                         %%%%%%%%

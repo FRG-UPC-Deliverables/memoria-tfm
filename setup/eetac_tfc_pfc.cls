@@ -25,7 +25,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{eetac_tfc_pfc}
+\ProvidesClass{setup/eetac_tfc_pfc}
               [2012/07/01 v2.1 EETAC TFC/PFC document style]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -290,9 +290,11 @@
 
   \settowidth{\Lautors}{{\normalsize\bf\sffamily\MakeUppercase   \@Nautors : }}
   \settowidth{\Ldirectors}{{\normalsize\bf\sffamily\MakeUppercase \@Ndirectors :}}
-    \renewcommand{\and}{\\ \hspace*{\Lautors}}
+  \renewcommand{\and}{\\ \hspace*{\Lautors}}
 
-  \begin{tabular}{p{\textwidth}}
+
+  \pdfbookmark{Title}{sec:title}
+   \begin{tabular}{p{\textwidth}}
     \ifthenelse{\boolean{logo}}{\usebox{\logo}   \\[8cm]}{\usebox{\logoEPSC} \\[8cm]}
     \begin{center}\Huge\sffamily\bfseries  MASTER THESIS \end{center}  \\[5cm]
                               
@@ -385,7 +387,6 @@
   
   \newlength{\Hoverview}
   \setlength{\Hoverview}{#1}
-  
   \begin{center}
     \begin{tabular}{|p{\textwidth}|}
       \hline
@@ -442,6 +443,7 @@
     \end{flushright}
     \cleartooddpage[\thispagestyle{empty}]  
   \fi
+  \pdfbookmark{Contents}{sec:contents}
   \tableofcontents
   \cleartooddpage[\thispagestyle{empty}]
   \ifpaginaLOF

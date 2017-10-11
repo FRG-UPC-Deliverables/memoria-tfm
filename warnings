@@ -1,0 +1,3 @@
+#!/bin/sh
+watch "cat /tmp/latex.log | grep --color -A 2 \"LaTeX\""
+
