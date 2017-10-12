@@ -1,26 +1,35 @@
 \chapter{Cross-platform development}
 
-\cite{soft-that-lasts}
+At the beginning of computers, each hardware manufacturer had to decide how to
+access to its hardware functionalities. Since not all of them were decided to be
+the same the fist inter-compatibility problems started to appear because 
+programs were able to run on different computers.
 
-At the beginning of computers, each hardware manufacturer had to decide how the
-programmer talks with its hardware. This fact created the cross-platform
-compatibility problem.
-
-When Operative Systems (OS) appeared, this problem was reduced because at that
-moment there is no need to create a different program for each manufacturer,
-just for each operative system. This is due to the operative systems have
-different drivers, provided for manufacturers, that logical functions to
-hardware operations.
-
-But the problem is not fully solved since the time to develop an application
-for several OS is to expensive in most cases.
+To reduce this problems drivers were created. A driver is a piece of code that 
+maps logical functions (for instance, turn on a led) to hardware operations 
+(short circuit some part of the hardware). Logic functions are provided to 
+programs by the Operative Systems (OS) so the problem now is that not all of 
+them can run on all the OS.
 
 \section{Technological soup}
 
 Nowadays lots of technologies has been created with the goal of writing just
-one code to run in all of the current platforms.
+one code to run in many platforms as possible. This reduces a lot the
+development cost by reducing performance or other factors .
+
+The most common way to achieve this goal is with scripting or virtual machine 
+programming languages. Those languages are interpreted on execution time. 
+Therefore programs created with this kind of technologies can run on all
+platforms supported by the interpreter.
+
+Another kind of solutions are transpilers or source-to-source compilers. They 
+translate from one programming language to many others. This languages are
+able to be executed on many platforms.
 
 \subsection{Java}
+
+This well known programming language is one of the most used to build
+cross-platform applications due to its maturity. 
 
 \subsection{Qt}
 
