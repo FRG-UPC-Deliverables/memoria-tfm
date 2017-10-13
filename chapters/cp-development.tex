@@ -1,41 +1,91 @@
 \chapter{Cross-platform development}
 
 At the beginning of computers, each hardware manufacturer had to decide how to
-access to its hardware functionalities. Since not all of them were decided to be
-the same the fist inter-compatibility problems started to appear because 
-programs were able to run on different computers.
+access to its hardware functionalities. Since there where no standards for some
+cases, the first inter-compatibility problems started to appear because
+programs were not able to run on different computers.
 
 To reduce this problems drivers were created. A driver is a piece of code that 
-maps logical functions (for instance, turn on a led) to hardware operations 
-(short circuit some part of the hardware). Logic functions are provided to 
-programs by the Operative Systems (OS) so the problem now is that not all of 
-them can run on all the OS.
+maps logic functions (for instance, turn on a led) to hardware operations 
+(short circuit some part of the electronics). Programs call this logic functions
+so for them it's not important how to turn on the led, is the driver who 
+specifies how to do it. Then for software, the only important part is how this
+functions are called.
+
+Logic functions are provided to programs by the Operative Systems (OS) so the 
+problem now is that not all OS use the same name to this functions.
 
 \section{Technological soup}
 
 Nowadays lots of technologies has been created with the goal of writing just
-one code to run in many platforms as possible. This reduces a lot the
-development cost by reducing performance or other factors .
+one code to run in as many platforms as possible. We want to achieve this
+to reduce the development cost but this results in a performance reduction.
 
-The most common way to achieve this goal is with scripting or virtual machine 
-programming languages. Those languages are interpreted on execution time. 
-Therefore programs created with this kind of technologies can run on all
-platforms supported by the interpreter.
+An intuitive solution may be to use cross-platform frameworks to perform the 
+functions that have problems with interoperability. This frameworks have 
+conditionals that execute a logic function or another depending on which 
+operative system is the one that is compiling this library.
 
-Another kind of solutions are transpilers or source-to-source compilers. They 
-translate from one programming language to many others. This languages are
-able to be executed on many platforms.
+But the most common way to achieve this goal is with scripting programming
+languages. This languages are human readable (text) that are interpreted by a
+program called interpreter. One step further is to compile this human readable
+text to pseudo-machine code that easy to understand for the interpreter, also
+known as virtual machine programming languages. This have the advantage that 
+programs are faster, but developers lose some time compiling the code each time 
+they want to test something. Both technologies can run over all the platforms
+that its interpreter is supported.
+
+Another kind of solutions are transcompilers or source-to-source compilers. They 
+translate from one programming language to many others. This translation could 
+be done in a scripting language (there interoperability is provided) or can make
+an specific translation to a compiled language depending on the OS.
 
 \subsection{Java}
 
 This well known programming language is one of the most used to build
-cross-platform applications due to its maturity. 
+cross-platform applications due to its maturity. Java is a general-purpose,
+concurrent, classbased, object-oriented language and it's designed to be easy
+to learn in order to let many programmers to have fluency in the language
+\cite{java-8-specs}.
+
+Classic compiled languages, such as, C and C++, directly compile into machine
+code, which is directly interpreted by the hardware. As opposed to C and C++,
+Java can be considered a virtual machine programming language.
+
+\begin{codefigure}{Java hello world}{F:java-hello-world}
+	\javaexternal{source/HelloWorldApp.java}
+\end{codefigure}
+
+Figure \ref{F:java-hello-world} is an example of Java program that prints the
+test "Hello World!" to the terminal.
 
 \subsection{Qt}
 
+A complete cross-platform software framework with ready-made UI elements, C++ 
+libraries, and a complete integrated development environment with tools for 
+everything you need to develop software for any project \cite{qt-web}.
+
+\begin{codefigure}{Qt hello world}{F:qt-hello-world}
+	\cppexternal{source/qt_hello_world.cpp}
+\end{codefigure}
+
 \subsection{Python}
 
-Using Kivy, a python GUI framework.
+This is an example of an scripting programming language. The main design rule
+was to create a language easy to read. That's why Python is very famous due to
+its strong tabulation rules.
+
+Its also a considered an object-oriented language suitable for many purposes.
+It has a clear, intuitive syntax, powerful high-level data structures, and a
+flexible dynamic type system \cite{An93pythonfor}.
+
+Python is often used to create terminal programs or web services because GUI
+are not supported by default but there are many frameworks that can be used,
+for instance, \textbf{Kivy}.
+
+\begin{codefigure}{Kivy hello world}{F:kivy-hello-world}
+	\pythonexternal{source/kivy_hello_world.py}
+\end{codefigure}
 
 \subsection{Electron}
 
