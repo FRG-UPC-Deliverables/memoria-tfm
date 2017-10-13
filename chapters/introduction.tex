@@ -5,19 +5,19 @@
 % TODO: REVISAR
 Nowadays it's impossible to think in live without digital technologies. They
 are involved in most of our daily actions, such as, to talk with friends, to
-read news and entertainment. For this reason, our electronic devices can be
-considered as digital sources of information that can be used even to prove
-what its owner has done at a specific moment.
+read news, documents transport and entertainment. For this reason, our
+electronic devices can be considered as digital sources of information that
+can even prove possible alibis.
 
 Digital forensics science, or digital forensics, is defined as:
 
 \begin{quote}
-"The use of scientifically derived and proven methods toward the preservation,
+“The use of scientifically derived and proven methods toward the preservation,
 collection, validation, identification, analysis, interpretation,
 documentation, and presentation of digital evidence derived from digital
 sources for the purpose of facilitation or furthering the reconstruction of
 events found to be criminal, or helping to anticipate unauthorized actions
-shown to be disruptive to planned operations" \cite{DFRWS-df-road-map}
+shown to be disruptive to planned operations” \cite{DFRWS-df-road-map}
 \end{quote}
 
 In several cases, when a search warrant is given to investigators, they can
@@ -26,14 +26,14 @@ for instance, hard disks (HDD). Using this information, they can look for
 evidences that prove the suspect's innocence or guiltiness.
 
 There are many ways to do this analysis, but the more generic one presented in
-\cite{ds-phases}, consists in:
+\cite{ds-phases}, consists on:
 
 \begin{description}
 	\item [Pre-Process]
-		This is one of the more important steps even sometimes this step 
-		could be forgotten. It consists in all the works needed to be 
-		done before the collection of data. To have all the approvals 
-		for relevant authorities is considered here.
+		This is one of the more important steps even if sometimes this step 
+		could be forgotten. It consists in all the works needed to be done
+		before the collection of data. To have all the approvals for relevant
+		authorities is considered here.
 
 	\item [Acquisition \& Preservation]
 		Once everything is prepared, now the investigator can acquire 
@@ -48,13 +48,12 @@ There are many ways to do this analysis, but the more generic one presented in
 
 	\item [Analysis]
 		Is the main phase of the investigation. It consists on extract
-		the relevant information acquired before. Many different 
-		techniques can be used: data recovery, words lookup, etc. Note
-		that, on this step, many different tools may be used to be able
-		to perform a proper analysis.
+		the relevant information acquired before. Many techniques can be 
+		used: data recovery, words lookup, etc. Note that, on this step,
+		some tools may be used to be able to perform a proper analysis.
 
 	\item [Presentation]
-		A good analysis is useless if it's not presented in a easy to 
+		A good analysis is useless if it's not presented in an easy to 
 		understand manner. After this phase, the innocence of the
 		suspect has to be proved or refused.
 
@@ -66,18 +65,17 @@ There are many ways to do this analysis, but the more generic one presented in
 
 There are many digital forensics analysis tools. A very complete software is 
 \textbf{EnCase Forensic} \cite{encase-web}. It has a lot of tools that can be 
-used from the acquisition step until the final report. But it's main 
-disadvantage is that is not open source.
+used from the acquisition step until the final report. But its main disadvantage
+is that it's not open source.
 
-Another well known software regarding digital forensics is \textbf{The Sleuth
+Another well-known software regarding digital forensics is \textbf{The Sleuth
 Kit} \cite{tsk-web}. This open source cross-platform toolkit is a collection 
-of terminal applications and a C library that allows you to analyze disk images 
+of terminal applications and a C library that allows you to analyze disk images
 and recover files from them. The Sleuth Kit team also developed
-\textbf{Autopsy}, with is a windows user interface to efficiently analyze hard 
-drives and smart phones.
+\textbf{Autopsy}, which is a Windows' user interface to efficiently analyze
+hard drives and smart phones.
 
 Due to the lack of open source cross-platform tools with user interface, the
 objective of this project develop one with the main functionalities of a 
-digital forensics software. The start point is to use The Sleuth Kit's C library 
-since it's cross-platform and a very mature project.
-
+digital forensics software. The start point is to use The Sleuth Kit's C
+library since it's cross-platform and a very mature project.

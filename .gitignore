@@ -1,6 +1,8 @@
 // 
 *.swp
-*.log
+plantilla_tfc.*
+!plantilla_tfc.tex
+!plantilla_tfc.bib
 
 
 // 
