@@ -1,6 +1,8 @@
 \chapter{Software architecture}
 
-% TODO
+% TODO: En este apartado empiezo a poner diagramas, los pongo a color o
+% mejor en blanco y engro??
+
 “Most systems work better they are kept simple rather than complicated”
 \cite{kiss-wiki}. This is the main statement of the KISS principle, acronym for
 “Keep it simple, stupid”. KISS philosophy is very used on software development
@@ -18,31 +20,53 @@ like \href{https://support.microsoft.com}{Microsoft Support}.
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.5\textwidth]{./figures/MVC-Process.png}
+		\includegraphics[width=0.5\textwidth]{./figures/mvc.png}
 		\caption{Diagram of interactions within the MVC pattern.
 				 \cite{mvc-wiki}}
-		\label{F:mvc-interactions}
+		\label{F:mvc}
 	\end{center}
 \end{figure}
 
-As shown on Figure \ref{F:mvc-interactions}, it is a simple model to represent
+As shown on Figure \ref{F:mvc}, it is a simple model to represent
 a user interface (UI). The UI visual representation is managed by the view.
 Each time the user performs an action, view notifies controller and it modifies
 the current model. Since view is watching it, the change is detected and view
 is affected.
 
 The problem is that this architecture becomes complex and complex while 
-increasing the number of view. Actions from a view can that affect other 
-views' model and this changes can trigger other actions. This complexity even
-generate unexpected loops.
+increasing the number of view. Actions from a view can affect other views'
+model and this changes can trigger other actions. This complexity even
+generate unexpected loops as Figure \ref{F:mvc-complex}.
+
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{./figures/mvc-complex.png}
+		\caption{Diagram of interactions within the MVC pattern with many views}
+		\label{F:mvc-complex}
+	\end{center}
+\end{figure}
 
 \section{Flux-like architecture: React + Redux}
 
 In order solve the MVC scalability problem, Facebook proposed Flux
 \cite{flux-web}. Flux is the application architecture that Facebook uses for
-building client-side web applications.
+building client-side web applications. To solve the loop problem, they devise
+an “unidirectional data flow with changes described as plain objects”.
 
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{./figures/flux.png}
+		\caption{Diagram of Flux}
+		\label{F:flux}
+	\end{center}
+\end{figure}
 
+Even through Figure \ref{F:flux} appears to have a loop, with Flux things are
+much easy to handle. By reason of all the application uses just one model,
+there no need to update other views' model. Hence, views just have to wait
+change events produces by the store and render themselves using this 
+information. Note that render processes do not need to call any action.
 
 \subsection{React}
 
