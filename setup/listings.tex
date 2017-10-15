@@ -1,0 +1,238 @@
+%%% MOVE THIS TO MACRO FILE?? %%%
+
+% Colors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\definecolor{pictonblue}{RGB}{62, 193, 233}
+\definecolor{turquoiseblue}{rgb}{0.388,0.831,0.960}
+\definecolor{saffron}{rgb}{0.372,0.211,0.988}
+\definecolor{rawsienna}{rgb}{0.819,0.576,0.255}
+
+\definecolor{brightedred}{RGB}{161,0,0}
+\definecolor{gigas}{RGB}{72, 62, 170}
+
+
+% Custom macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lstcustomdefaults}{
+	\setkeys{lst}{
+		basicstyle=\footnotesize\ttfamily,
+		aboveskip=3mm,
+		belowskip=3mm,
+		showstringspaces=false,
+		columns=flexible,
+		numbers=left,
+		numberstyle=\footnotesize,
+		breaklines=true,
+		breakatwhitespace=true,
+		tabsize=3,
+	}
+}
+\newcommand{\newproglanguage}[2]{
+	\expandafter\newcommand\csname #1style\endcsname[1][]{
+		#2
+		\lstcustomdefaults
+		\setkeys{lst}{##1}
+	}
+	
+	\lstnewenvironment{#1}[1][]
+	{
+		\expandafter\csname #1style\endcsname
+		\lstset{##1}
+	}
+	{}
+	
+	\expandafter\DeclareDocumentCommand\csname #1external\endcsname
+	{ O{} m }
+	{
+		\expandafter\csname #1style\endcsname
+		\lstinputlisting[##1]{##2}
+	}
+	
+	\expandafter\newcommand\csname #1inline\endcsname
+	[1]{{\expandafter\csname #1style\endcsname\lstinline!##1!}}
+}
+
+%% Code figure
+\newenvironment{codefigure}[2]{
+	\begin{figure}[htb]
+		\begin{quote}
+			\def\codeFigCaption{#1}
+			\def\codeFigLabel{#2}
+}
+{
+			\caption{\codeFigCaption}
+			\label{\codeFigLabel}
+		\end{quote}
+	\end{figure}
+}
+
+%% Bash code
+\newenvironment{bashcode}{
+	\begin{center}\itshape\bfseries
+}
+{
+	\end{center}
+}
+
+
+% Style highlighting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Java
+\newproglanguage{java}{
+	\lstset{
+		language=Java,
+		basicstyle={\small\ttfamily},
+		numberstyle=\tiny\color{gray},
+		keywordstyle=\color{blue},
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{mauve},
+	}
+}
+
+%% Python
+\newproglanguage{python}{
+	\lstset{
+		language=Python,
+		otherkeywords={self},             	% Add keywords here
+		keywordstyle=\color{deepblue},
+		emph={
+			__init__,
+			TestApp,
+			App,
+			Button
+		},          				    	% Custom highlighting
+		emphstyle=\color{deepred},    		% Custom highlighting style
+		stringstyle=\color{deepgreen},
+	}
+}
+
+%% C++
+\newproglanguage{cpp}{
+	\lstset{
+		language=C++,
+		% Language settings
+		commentstyle=\color{dkgreen}\ttfamily,
+		identifierstyle=\color{black},
+		stringstyle=\color{red}\ttfamily,
+		% Syntax keywords
+		classoffset=0,
+		keywordstyle=\color{blue},
+		% Classes
+		classoffset=1,
+		keywordstyle=\color{turquoiseblue}\bfseries,
+	}
+}
+
+
+%% JavaScript
+\lstdefinelanguage{JavaScript}{
+	% Keywords
+	keywords=[1]{typeof, new, true, false, catch, function, return,
+		null, catch, switch, var, if, in, while, do, else, case,
+		break, const, let, class, export, boolean, throw, implements,
+		import, this},
+	% Language settings
+	sensitive=true,
+	% Comments
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	% Strings
+	morestring=[b]',
+	morestring=[b]",
+}
+\newproglanguage{js}{
+	\lstset{
+		language=JavaScript,
+		% General theme
+		commentstyle=\color{dkgreen}\ttfamily,
+		identifierstyle=\color{black},
+		stringstyle=\color{red}\ttfamily,
+		% Syntax keywords
+		classoffset=0,
+		keywordstyle=\color{gigas}\bfseries,
+		% Classes
+		classoffset=1,
+		keywordstyle=\color{turquoiseblue}\bfseries,
+	}
+}
+
+
+%% Haxe
+\lstdefinelanguage{Haxe}{
+	% General theme
+	sensitive=true,
+	% Syntax keywords
+	classoffset=0,
+	keywords={class, static, public, function, var},
+	% Classes
+	classoffset=1,
+	keywordstyle={String, Void},
+	% Comments
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	% Strings
+	morestring=[b]',
+	morestring=[b]"
+}
+\newproglanguage{haxe}{
+	\lstset{
+		language=Haxe,
+		% General theme
+		commentstyle=\color{dkgreen}\ttfamily,
+		stringstyle=\color{red}\ttfamily,
+		identifierstyle=\color{black},
+		% Syntax keywords
+		classoffset=0,
+		keywordstyle=\color{blue}\bfseries,
+		% Classes
+		classoffset=1,
+		keywordstyle=\color{turquoiseblue}\bfseries,
+	}
+}
+
+
+%% Sass
+\lstdefinelanguage{Sass}{
+	alsoletter=[0]{-, :, \#, .},
+	sensitive=false,
+	% CSS properties
+	classoffset=0,
+	keywords={background-color:, color:, display:, flex:},
+	% SCSS @ methods
+	classoffset=1,
+	keywords={@include, @mixin},
+	% User defined variables and classes
+	classoffset=2,
+	% Comments
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	% Strings
+	morestring=[b]',
+	morestring=[b]"
+}
+\newproglanguage{sass}{
+	\lstset{
+		language=Sass,
+		% General theme
+		commentstyle=\color{dkgreen}\ttfamily,
+		stringstyle=\color{red}\ttfamily,
+		identifierstyle={\color{gigas}\small\ttfamily},
+		% CSS properties
+		classoffset=0,
+		keywordstyle=\color{brightedred}\bfseries,
+		% SCSS @ methods
+		classoffset=1,
+		keywordstyle=\color{black}\bfseries,
+		% User defined variables and classes
+		classoffset=2,
+		keywordstyle=\color{pictonblue},
+	}
+}
+
