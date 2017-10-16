@@ -133,13 +133,17 @@
 
 %% JavaScript
 \lstdefinelanguage{JavaScript}{
-	% Keywords
-	keywords=[1]{typeof, new, true, false, catch, function, return,
-		null, catch, switch, var, if, in, while, do, else, case,
-		break, const, let, class, export, boolean, throw, implements,
-		import, this},
 	% Language settings
 	sensitive=true,
+	% Keywords
+	classoffset=0,
+	keywords={typeof, new, true, false, catch, function, return,
+		null, catch, switch, var, if, in, while, do, else, case,
+		break, const, let, class, export, boolean, throw, implements,
+		default, import, this, extends},
+	% Classes
+	classoffset=1,
+	keywords={Math},
 	% Comments
 	comment=[l]{//},
 	morecomment=[s]{/*}{*/},
@@ -163,6 +167,46 @@
 	}
 }
 
+
+%% JSX
+\lstdefinelanguage{JSX}{
+	% Language settings
+	alsoletter={<, >, \/},
+	sensitive=true,
+	% Keywords
+	classoffset=0,
+	keywords={typeof, new, true, false, catch, function, return,
+		null, catch, switch, var, if, in, while, do, else, case,
+		break, const, let, class, export, boolean, throw, implements,
+		default, import, this, extends},
+	% HTML
+	classoffset=2,
+	keywords={<div>, <\/div>, />},
+	% Comments
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	% Strings
+	morestring=[b]',
+	morestring=[b]",
+}
+\newproglanguage{jsx}{
+	\lstset{
+		language=JSX,
+		% General theme
+		commentstyle=\color{dkgreen}\ttfamily,
+		identifierstyle=\color{black},
+		stringstyle=\color{red}\ttfamily,
+		% Syntax keywords
+		classoffset=0,
+		keywordstyle=\color{gigas}\bfseries,
+		% Classes
+		classoffset=1,
+		keywordstyle=\color{turquoiseblue}\bfseries,
+		% HTML
+		classoffset=2,
+		keywordstyle=\color{black}\bfseries,
+	}
+}
 
 %% Haxe
 \lstdefinelanguage{Haxe}{
@@ -200,7 +244,7 @@
 
 %% Sass
 \lstdefinelanguage{Sass}{
-	alsoletter=[0]{-, :, \#, .},
+	alsoletter={-, :, \#, .},
 	sensitive=false,
 	% CSS properties
 	classoffset=0,
