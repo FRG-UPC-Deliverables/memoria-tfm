@@ -76,16 +76,16 @@
 \usepackage{longtable}          
 
 %% Permet canviar els colors del document
-%\usepackage{color,colortbl}
+\usepackage{color,colortbl}
 
 %% Paquet molt útil que permet activar links en el PDF final.
-%% * NO OBLIDAR DE CONFIGURAR els quatre primer camps!
 \usepackage[
-	pdfauthor={Fernando Román García},
-  	% Modificació respecte a la versió 2.1 - Iván Padilla Montero - Juliol 2014
-  	pdftitle={Treball Fi de Grau - autor}, 		% TODO
-	pdfsubject={Titol del TFG aqui},       		% TODO
-	pdfkeywords={keyword1, keyword2, ...},    	% TODO
+  	% CUSTOM PDF 
+  	pdfauthor={Fernando Román García},
+  	pdftitle={Master thesis - Fernando Román García},
+	pdfsubject={An enhanced SleuthKit GUI for digital forensics},
+	pdfkeywords={digital, forensics, sleuth, kit, GUI},
+	%
   	pdfcreator={EETAC-UPC},
 	pdfproducer={LaTeX, dvipdf},
 	pdfdisplaydoctitle=true,
@@ -117,12 +117,13 @@
 %%       Si no es desitja utilitzar aquest paquet, comentar la linia seguent
 %%       i anar TAMBE al fitxer de classe (eetac_tfc_pfc.cls) per substituir: 
 %%       \RequirePackage[subfigure]{tocloft}  per  \RequirePackage{tocloft}
-\usepackage{subfigmat}         
+\usepackage{subfigmat}
 
+% Custom packages
 \usepackage{xparse}
 \usepackage{listings}
-\usepackage{color}
-
+\usepackage{rotating}
+\usepackage{pdflscape}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 3- DOCUMENT
@@ -224,6 +225,7 @@ Standing Committee \end{overview}
 %%%%%% INCLOURE A PARTIR D'AQUI TOTS ELS CAPÍTOLS DELS APENDIXS   %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{appendix/electron-main}
 \input{appendix/glossary}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -9,13 +9,16 @@
 \definecolor{deepred}{rgb}{0.6,0,0}
 \definecolor{deepgreen}{rgb}{0,0.5,0}
 
+\definecolor{deepviolet}{RGB}{121, 8, 125}
+
+\definecolor{gigas}{RGB}{72, 62, 170}
 \definecolor{pictonblue}{RGB}{62, 193, 233}
-\definecolor{turquoiseblue}{rgb}{0.388,0.831,0.960}
+\definecolor{turquoiseblue}{RGB}{64, 224, 208}
+
 \definecolor{saffron}{rgb}{0.372,0.211,0.988}
 \definecolor{rawsienna}{rgb}{0.819,0.576,0.255}
 
 \definecolor{brightedred}{RGB}{161,0,0}
-\definecolor{gigas}{RGB}{72, 62, 170}
 
 
 % Custom macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,6 +26,7 @@
 \newcommand{\lstcustomdefaults}{
 	\setkeys{lst}{
 		basicstyle=\footnotesize\ttfamily,
+	 	captionpos=b,
 		aboveskip=3mm,
 		belowskip=3mm,
 		showstringspaces=false,
@@ -60,17 +64,11 @@
 }
 
 %% Code figure
-\newenvironment{codefigure}[2]{
-	\begin{figure}[htb]
-		\begin{quote}
-			\def\codeFigCaption{#1}
-			\def\codeFigLabel{#2}
+\newenvironment{codefigure}{
+	\begin{quote}
 }
 {
-			\caption{\codeFigCaption}
-			\label{\codeFigLabel}
-		\end{quote}
-	\end{figure}
+	\end{quote}
 }
 
 %% Bash code
@@ -88,11 +86,17 @@
 \newproglanguage{java}{
 	\lstset{
 		language=Java,
-		basicstyle={\small\ttfamily},
+		% Language settings
 		numberstyle=\tiny\color{gray},
-		keywordstyle=\color{blue},
 		commentstyle=\color{dkgreen},
-		stringstyle=\color{mauve},
+		stringstyle=\color{red},
+		% Classes
+		classoffset=0,
+		keywordstyle=\color{gigas},
+		% Classes
+		classoffset=1,
+		keywords={System, String},
+		keywordstyle=\color{deepviolet}\itshape,
 	}
 }
 
@@ -100,16 +104,16 @@
 \newproglanguage{python}{
 	\lstset{
 		language=Python,
-		otherkeywords={self},             	% Add keywords here
+		otherkeywords={self},             	 % Add keywords here
 		keywordstyle=\color{deepblue},
 		emph={
 			__init__,
 			TestApp,
 			App,
 			Button
-		},          				    	% Custom highlighting
-		emphstyle=\color{deepred},    		% Custom highlighting style
-		stringstyle=\color{deepgreen},
+		},          				    	 % Custom highlighting
+		emphstyle=\color{deepviolet}\itshape,% Custom highlighting style
+		stringstyle=\color{red},
 	}
 }
 
@@ -121,12 +125,13 @@
 		commentstyle=\color{dkgreen}\ttfamily,
 		identifierstyle=\color{black},
 		stringstyle=\color{red}\ttfamily,
+		morecomment=[l][\color{magenta}]{\#},
 		% Syntax keywords
 		classoffset=0,
-		keywordstyle=\color{blue},
+		keywordstyle=\color{gigas},
 		% Classes
 		classoffset=1,
-		keywordstyle=\color{turquoiseblue}\bfseries,
+		keywordstyle=\color{deepviolet}\itshape,
 	}
 }
 
@@ -143,7 +148,8 @@
 		default, import, this, extends},
 	% Classes
 	classoffset=1,
-	keywords={Math},
+	keywords={Math, BrowserWindow, Menu, MenuItem, Rx, Observable, Date,
+			  module, exports},
 	% Comments
 	comment=[l]{//},
 	morecomment=[s]{/*}{*/},
@@ -160,13 +166,53 @@
 		stringstyle=\color{red}\ttfamily,
 		% Syntax keywords
 		classoffset=0,
-		keywordstyle=\color{gigas}\bfseries,
+		keywordstyle=\color{gigas},
 		% Classes
 		classoffset=1,
-		keywordstyle=\color{turquoiseblue}\bfseries,
+		keywordstyle=\color{deepviolet}\itshape,
 	}
 }
 
+%% JavaScript
+\lstdefinelanguage{TypeScript}{
+	% Language settings
+	language=JavaScript,
+	sensitive=true,
+	% Keywords
+	classoffset=0,
+	keywords={typeof, new, true, false, catch, function, return,
+		null, catch, switch, var, if, in, while, do, else, case,
+		break, const, let, class, export, boolean, throw, implements,
+		default, import, this, extends,
+		%
+		interface, type, constructor, public, private},
+	% Classes
+	classoffset=1,
+	keywords={Math, BrowserWindow, Menu, MenuItem, Rx, Observable, Date,
+		%
+		string},
+	% Comments
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	% Strings
+	morestring=[b]',
+	morestring=[b]",
+}
+\newproglanguage{ts}{
+	\lstset{
+		language=TypeScript,
+		% General theme
+		commentstyle=\color{dkgreen},
+		identifierstyle=\color{black},
+		stringstyle=\color{red},
+		% Syntax keywords
+		classoffset=0,
+		keywordstyle=\color{gigas},
+		% Classes
+		classoffset=1,
+		keywordstyle=\color{deepviolet}\itshape,
+	}
+}
 
 %% JSX
 \lstdefinelanguage{JSX}{
@@ -179,9 +225,12 @@
 		null, catch, switch, var, if, in, while, do, else, case,
 		break, const, let, class, export, boolean, throw, implements,
 		default, import, this, extends},
+	% Classes
+	classoffset=1,
+	keywords={Math, BrowserWindow, Menu, MenuItem, Rx, Observable, Date},
 	% HTML
 	classoffset=2,
-	keywords={<div>, <\/div>, />},
+	keywords={<div>,<\/div>,/>},
 	% Comments
 	comment=[l]{//},
 	morecomment=[s]{/*}{*/},
@@ -193,18 +242,19 @@
 	\lstset{
 		language=JSX,
 		% General theme
-		commentstyle=\color{dkgreen}\ttfamily,
+		commentstyle=\color{dkgreen},
 		identifierstyle=\color{black},
-		stringstyle=\color{red}\ttfamily,
+		stringstyle=\color{red},
 		% Syntax keywords
 		classoffset=0,
-		keywordstyle=\color{gigas}\bfseries,
+		keywordstyle=\color{gigas},
 		% Classes
 		classoffset=1,
-		keywordstyle=\color{turquoiseblue}\bfseries,
+		keywordstyle=\color{deepviolet}\itshape,
 		% HTML
 		classoffset=2,
-		keywordstyle=\color{black}\bfseries,
+		moredelim=*[s][{\color{saffron}}]{<}{>},
+		keywordstyle=\color{saffron},
 	}
 }
 
@@ -217,7 +267,7 @@
 	keywords={class, static, public, function, var},
 	% Classes
 	classoffset=1,
-	keywordstyle={String, Void},
+	keywords={String, Void},
 	% Comments
 	comment=[l]{//},
 	morecomment=[s]{/*}{*/},
@@ -229,15 +279,15 @@
 	\lstset{
 		language=Haxe,
 		% General theme
-		commentstyle=\color{dkgreen}\ttfamily,
-		stringstyle=\color{red}\ttfamily,
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{red},
 		identifierstyle=\color{black},
 		% Syntax keywords
 		classoffset=0,
-		keywordstyle=\color{blue}\bfseries,
+		keywordstyle=\color{gigas},
 		% Classes
 		classoffset=1,
-		keywordstyle=\color{turquoiseblue}\bfseries,
+		keywordstyle=\color{deepviolet}\itshape,
 	}
 }
 
@@ -265,18 +315,52 @@
 	\lstset{
 		language=Sass,
 		% General theme
-		commentstyle=\color{dkgreen}\ttfamily,
-		stringstyle=\color{red}\ttfamily,
-		identifierstyle={\color{gigas}\small\ttfamily},
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{red},
+		identifierstyle={\color{gigas}},
 		% CSS properties
 		classoffset=0,
-		keywordstyle=\color{brightedred}\bfseries,
+		keywordstyle=\color{brightedred},
 		% SCSS @ methods
 		classoffset=1,
-		keywordstyle=\color{black}\bfseries,
+		keywordstyle=\color{black},
+		% User defined variables and classes
+		classoffset=2,
+		keywordstyle=\color{deepviolet},
+	}
+}
+
+%% HTML5
+\lstdefinelanguage{HTML5}{
+	language=html,
+	sensitive=true, 
+	alsoletter={<>=-},
+	otherkeywords={
+		% HTML tags
+		<html>, <head>, <title>, </title>, <meta, />, </head>, <body>,
+		<canvas, \/canvas>, <script>, </script>, </body>, </html>, <!,
+		<header>, </header>,
+		<style>, </style>, ><
+	}, 
+	morecomment=[s]{<!--}{-->},
+	tag=[s]
+}
+\newproglanguage{html}{
+	\lstset{
+		language=HTML5,
+		alsolanguage=JavaScript,
+		% General theme
+		commentstyle=\color{dkgreen}\ttfamily,
+		stringstyle=\color{red}\ttfamily,
+		identifierstyle={\color{black}\small\ttfamily},
+		% CSS properties
+		classoffset=0,
+		keywordstyle=\color{gigas}\bfseries,
+		% SCSS @ methods
+		classoffset=1,
+		keywordstyle=\color{turquoiseblue}\bfseries,
 		% User defined variables and classes
 		classoffset=2,
 		keywordstyle=\color{pictonblue},
 	}
 }
-

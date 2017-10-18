@@ -1,7 +1,7 @@
 \chapter{Software architecture}
 
 % TODO: En este apartado empiezo a poner diagramas, los pongo a color o
-% mejor en blanco y engro??
+% mejor en blanco y negro??
 
 “Most systems work better they are kept simple rather than complicated”
 \cite{kiss-wiki}. This is the main statement of the KISS principle, acronym for
@@ -38,7 +38,6 @@ increasing the number of view. Actions from a view can affect other views'
 model and this changes can trigger other actions. This complexity could even
 generate unexpected loops as Figure \ref{F:mvc-complex} proves.
 
-
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{./figures/mvc-complex.png}
@@ -47,7 +46,7 @@ generate unexpected loops as Figure \ref{F:mvc-complex} proves.
 	\end{center}
 \end{figure}
 
-\section{Flux-like architecture: React + Redux}
+\section{Flux-like architecture}
 
 In order solve the MVC scalability problem, Facebook proposed Flux
 \cite{flux-web}. Flux is the application architecture that Facebook uses for
@@ -76,8 +75,11 @@ function. Furthermore, to make things easier, React supports JSX which are
 JavaScript files where HTML code can be used.
 
 
-\begin{codefigure}{React hello world}{F:react-hello-world}
+\begin{codefigure}
 	\jsxexternal[
+		caption=React hello world,
+		label=L:react-hello-world,
+		%
 		classoffset=1,
 		morekeywords={HelloMessage, React, Component, ReactDOM},
 		classoffset=2,
@@ -85,7 +87,7 @@ JavaScript files where HTML code can be used.
 	]{source/react-hello-world.jsx}
 \end{codefigure}
 
-Figure \ref{F:react-hello-world} shows up an example of React component. It has
+Listing \ref{L:react-hello-world} shows up an example of React component. It has
 a no state, a property call name and an easy render function to create a div.
 Render functions can also have components inside themselves. That way, React
 creates a component tree \ref{F:react-tree}.
@@ -110,13 +112,7 @@ elements to perform actions.
 Redux was inspired by several important qualities of Flux. Like Flux, Redux
 prescribes that you concentrate your model update logic in a certain layer of
 your application (“stores” in Flux, “reducers” in Redux) \cite{redux-prior-art}.
-
-The model is called state and it is contained inside a store. Actions are
-dispatched using the store. Then, those actions can modify the state using
-reducers.
-
-But to exploit the full potential of Redux, tree principles must be followed
-\cite{redux-principles}.
+Redux have tree principles must be followed \cite{redux-principles}.
 
 \begin{description}
 	\item [Single source of truth]
@@ -133,6 +129,21 @@ But to exploit the full potential of Redux, tree principles must be followed
 
 \end{description}
 
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{./figures/redux.png}
+		\caption{Redux architecture}
+		\label{F:redux-architecture}
+	\end{center}
+\end{figure}
+
+Figure \ref{F:redux-architecture} shows up the overall architecture of 
+Redux. First of all a store must be created. This store contains reducers that
+map action created by action creators into state changes. If needed, selectors
+can be used to cache some state costly transformations. Store also exposes a
+subscription function to receive state change notifications.
+
 \subsubsection{Action creators}
 
 An action is a plain JavaScript object that contains a field called type to 
@@ -141,54 +152,183 @@ can be created in many places of the code so it is extremely recommended to use
 action creators.
 
 Action creators are functions that create those objects. Normally are defined
-using lambdas. An example of action creator is shown on Figure
-\ref{F:redux-action-creator}.
+using lambdas. An example of action creator is shown on Listing
+\ref{L:redux-action-creator}.
 
-\begin{codefigure}{Redux action creator}{F:redux-action-creator}
-	\jsexternal{source/redux-action-creator.js}
+\begin{codefigure}
+	\jsexternal[
+		caption=Redux action creator,
+		label=L:redux-action-creator,
+	]{source/redux-action-creator.js}
 \end{codefigure}
 
 \subsubsection{Reducers}
 
 Reducers aim to return new states each time an action is produced. They must be
-implemented using pure functions. Tree statements must be followed:
+implemented using pure functions. Tree statements must be followed.
 
-\begin{description}
-	\item [Mapping]
-	Same input always returns the same output.\\
-		\textbf{KO}: \jsinline{ const mult = (x) => Math.random() * x; }\\
-		\textbf{OK}: \jsinline{ const mult = (x) => 2 * x; }
+The fist one is \textbf{mapping}. To fulfill it means that same input always 
+returns the same output. Therefore, pure functions can not generate random
+numbers nor current date. If this statement is not followed, functions are
+difficult to test since its return value is unpredictable.
 
-	\item [Avoid side effects]
-	Cannot produce changes outside. \\
-		\textbf{KO}: \jsinline{ const title = (x) => document.title = x; }\\
+\begin{center}
+	\textbf{KO}: \jsinline{ const mult = (x) => Math.random() * x; }
+\end{center}
 
-	\item [No external mutable]
-	Output won't change due to any implicit action.\\
-		\textbf{KO}: \jsinline{ const rename = (obj, val) => obj.name = val; }\\
-		\textbf{OK}: \jsinline{
-			const rename = (obj, val) => \{ ...obj, name: val \}; 
-		} \\
-\end{description}
+The way to fix this issue is simply adding this values as a parameter of the 
+function.
 
-Figure \ref{F:redux-reducer} shows up an example of reducer for action shown on
-Figure \ref{F:redux-action-creator}
+\begin{center}
+	\textbf{OK}: \jsinline{ const mult = (x, rnd) => rnd * x; }
+\end{center}
 
-\begin{codefigure}{Redux reducer}{F:redux-reducer}
-	\jsexternal{source/redux-reducer.js}
+The second statement is \textbf{Avoid side effects}. This means that function's
+code must not modify anything that don't belong to it.
+
+\begin{center}
+	\textbf{KO}: \jsinline{ const title = (x) => document.title = x; }
+\end{center}
+
+Removing side effects makes the application's flow easy to follow reducing
+complexity.
+
+And last but not least \textbf{No external mutable}. This means that the output
+of the function must be independent to changes once the value is retrieved. But
+how can this happen? Easy, when a JavaScript object is assigned to another
+variable, it is a reference, not a copy. If any of both variables changes, it
+will affect also to the other. A simple example of this issue is shown on 
+Listing \ref{L:obj-ref}.
+
+\begin{codefigure}
+	\jsexternal[
+		caption=Object reference effect,
+		label=L:obj-ref,
+	]{source/obj-ref.js}
 \end{codefigure}
 
+Therefore, an example of non pure function due to no external mutation is:
 
+\begin{center}
+	\textbf{KO}: \jsinline{ const rename = (obj, val) => obj.name = val; }
+\end{center}
+
+The way to make this function follow no external mutable principle, the returned
+object must be a copy for the one provided as parameter.
+
+\begin{center}
+	\textbf{OK}: \jsinline{
+		const rename = (obj, val) => \{ ...obj, name: val \};
+	}
+\end{center}
+
+Then applying this three principles, Listing \ref{L:redux-reducer} shows up an
+example of reducer for action shown on Listing \ref{L:redux-action-creator}.
+
+\begin{codefigure}
+	\jsexternal[
+		caption=Redux reducer,
+		label=L:redux-reducer,
+	]{source/redux-reducer.js}
+\end{codefigure}
+
+This function in called by the store each time an action is dispatched. 
+Reducers can be aggregated using a function provided by Redux called
+\textit{"combineReducers"}. Listing \ref{L:redux-agg-reducers} shows an example.
+
+\begin{codefigure}
+	\jsexternal[
+		caption=Reducer aggregation,
+		label=L:redux-agg-reducers,
+	]{source/redux-agg-reducers.js}
+\end{codefigure}
 
 \subsubsection{Selectors}
+\label{S:selectors}
 
-\subsection{Complements}
+Selectors are pure functions that can cache the return value and it is just 
+recomputed if any of the input parameters changes. For instance, a selector
+can be created to select items that starts with letter 'I'. This example is
+shown on Listing \ref{L:redux-selector}.
 
-\subsubsection{Redux Observables}
+\begin{codefigure}
+	\jsexternal[
+		caption=Redux selector,
+		label=L:redux-selector,
+	]{source/redux-selector.js}
+\end{codefigure}
 
-\subsubsection{React Redux Form}
+\subsubsection{Store}
 
-\subsubsection{React Tables}
+To create a store is as easy as provide the root reducer and the initial state.
+Then actions can be dispatched and a function can be subscribed to detect any
+state change.
+
+Listing \ref{L:redux-store} shows how to create a store. Also,
+selector created in Section \ref{S:selectors} is used to calculate the items'
+subset just if they have change. Also, several actions are dispatched.
+
+\begin{codefigure}
+	\jsexternal[
+		caption=Redux store creation and management,
+		label=L:redux-store,
+	]{source/redux-store.js}
+\end{codefigure}
+
+\subsection{Action observables}
+
+Observables are data streams provided by a library called Reactive Extensions
+for JavaScript (rxjs). The idea is to treat those streams as asynchronous 
+events and apply fluent query operators.
+
+\begin{codefigure}
+	\jsexternal[
+		caption=Rxjs observable to count seconds until last click,
+		label=L:rxjs-simple-observable,
+	]{source/rxjs-simple-observable.js}
+\end{codefigure}
+
+As shown on Listing \ref{L:rxjs-simple-observable}, complex behaviors can be
+implemented in an easy to read way using this library. The example shows up
+how to count the difference in time between two button clicks. To do that, 
+an observable is created to watch the event click of a button. The operator scan
+caches the last returned value sending it as first parameter of the callback
+function. Last scanned is mapped to get the difference in seconds of last
+and current time values. Finally, this difference is printed on a text element.
+
+Since Redux's reducers must be pure functions and there are many complex
+behaviors that have to be chained when some actions are produced, Redux
+Observables provides a middleware that handles action streams using rxjs
+observables. The observable is executed after the action has been reduced.
+So Redux architecture (Figure \ref{F:redux-architecture}) must be complemented 
+with Figure \ref{F:redux-observables-architecture}.
+
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=0.6\textwidth]{./figures/redux-observables.png}
+		\caption{Redux Observables architecture}
+		\label{F:redux-observables-architecture}
+	\end{center}
+\end{figure}
+
+\subsection{React-Redux}
+
+To let React and Redux work together, Redux store must be provided inside React
+tree. Also, action creators and state have to be mapped into React properties.
+
+\begin{landscape}
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=1.3\textwidth]
+		{./figures/overall-architecture.png}
+
+		\caption{Overall architecture}
+		\label{F:overall-architecture}
+	\end{center}
+\end{figure}
+\end{landscape}
 
 \section{The Sleuth Kit JavaScript}
+
+
 

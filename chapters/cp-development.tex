@@ -1,128 +1,178 @@
 \chapter{Cross-platform development}
 
-At the beginning of computers, each hardware manufacturer had to decide how
-access to its hardware functionalities. Since there were no standards for some
-cases, the first inter-compatibility problems started to appear because
-programs were not able to run on different computers.
+At the beginning of computers, each manufacturer had to decide how access to
+their hardware functionalities. Since there were no standards for some cases,
+the first inter-compatibility problems started to appear because programs were
+not able to run on different computers.
 
-To reduce these problems drivers were created. A driver is a piece of code that 
-maps logic functions (for instance, turn on a led) to hardware operations 
-(short circuit some part of the electronics). Programs call this logic functions
-so for them it's not important how to turn on the led, is the driver who 
-specifies how to do it. Then, for software, the only important part is how these
-functions are called.
+When Operative Systems (OS) appeared, they started to use drivers. A driver is
+an interface that maps logic functions (for instance, turn on a led) to hardware
+operations (short circuit some part of the electronics). Those drivers are
+provided by manufacturers to let its hardware work when using an OS.
 
-Logic functions are provided to programs by the Operative Systems (OS) so the 
-problem now is that not all OS use the same functions names.
+Nowadays desktop applications are not programmed directly for a specific 
+hardware. OS are in charge to expose an application programming interface (API)
+to access those functionalities.
+
+For a software, to be cross-platform means run over different OS. Since API
+exposed are not the equal, programs are not cross-platform by default.
 
 \section{Technological soup}
 
-Nowadays lots of technologies has been created with the goal of writing just
-one code to run in as many platforms possible. We want to achieve this
-in order to reduce the development cost, but this results in a performance
-reduction.
+Nowadays lots of technologies has been created aimed to writing just one code
+that runs in as many as platforms possible. The motivation to achieve this goal
+is obvious, to reduce the development cost. But, as opposed to this gain, it
+results in some performance reduction.
 
-The most intuitive solution may be to use cross-platform frameworks to perform
-the functions that have problems with interoperability. These frameworks have 
-conditionals that execute a logic function or another depending on which 
-operative system is the one that is compiling this library.
+Most intuitive solution is to use cross-platform frameworks. Those have
+conditionals that uses an API function or another depending on which operative
+system is used to compile the library.
 
-But the common way to achieve this goal is with scripting programming
-languages. These are human readable text and are interpreted by a program
-called interpreter during the execution time. One step further is to compile
-them into pseudo-machine code that is easy to understand for the interpreter.
-This second group of is known as virtual machine programming languages. This
-have the advantage that programs are faster, but developers lose some time
-compiling the code each time they want to test something. Both technologies can
-run over all the platforms that its interpreter is supported.
+But the common way is with scripting programming languages. Those are human
+readable strings that are interpreted by a program called interpreter during
+execution time. One step further is to compile the source code into an
+intermediate pseudo-machine code that is easier to understand for the
+interpreter. This second group is known as virtual machine programming
+languages. Their main advantage is that programs run faster, but in contrast,
+developers lose some time compiling the code each time they want to test the
+application. Both technologies can run over all the platforms that its
+interpreter supports.
 
-Another kind of solutions are transcompilers or source-to-source compilers. They
-translate from one programming language to many others. This translation could
-be done in a scripting language (there interoperability is provided) or can make
-a specific translation to a compiled language depending on the OS.
+The last solution is to use transcompilers or source-to-source compilers.
+They translate from one programming language to many others. This translation
+could be done into a scripting language (there intercompatiblity is provided) or
+can make a specific translation to a compiled language depending on the OS.
 
-\subsection{Java}
+\begin{figure}[htb]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{./figures/techsoup.png}
+		\caption{Some cross-platform technologies}
+		\label{F:tech-soup}
+	\end{center}
+\end{figure}
 
-This well-known programming language is one of the most used to build
-cross-platform applications due to its maturity. Java is a general-purpose,
-concurrent, classbased, object-oriented language and it's designed to be easy
-to learn in order to let many programmers to have fluency in the language
-\cite{java-8-specs}.
-
-Classic compiled languages, such as, C and C++, directly compile into machine
-code, which is directly interpreted by the hardware. As opposed to C and C++,
-Java can be considered a virtual machine programming language.
-
-\begin{codefigure}{Java hello world}{F:java-hello-world}
-	\javaexternal{source/HelloWorldApp.java}
-\end{codefigure}
-
-Figure \ref{F:java-hello-world} is an example of Java program that prints the
-test “Hello World!” into the terminal.
+More than twenty years putting effort to solve this problem have created a 
+technological soup (Figure \ref{F:tech-soup}). Qt, Python, JavaScript, Java and 
+Haxe are some examples among many others.
 
 \subsection{Qt}
 
-A complete cross-platform software framework with ready-made UI elements, C++ 
-libraries, and a complete integrated development environment with tools for 
+Qt is a complete cross-platform software framework with ready-made UI elements,
+C++ libraries, and a complete integrated development environment with tools for 
 everything you need to develop software for any project \cite{qt-web}.
 
-\begin{codefigure}{Qt hello world}{F:qt-hello-world}
-	\cppexternal{source/qt_hello_world.cpp}
+\begin{codefigure}
+	\cppexternal[
+	caption=Qt hello world,
+	label=L:qt-hello-world,
+	%
+	classoffset=1,
+	morekeywords={QPushButton, QApplication}
+	]{source/qt_hello_world.cpp}
 \end{codefigure}
+
+Code of Listing \ref{L:qt-hello-world} creates a window and add a button that
+says Hello World with size 100x30.
 
 \subsection{Python}
 
-This is an example of a scripting programming language. The main design rule
-was to be very easy to read.
+Python is an example of a scripting programming language. The main design rule
+was to be very easy to read. For this reason, Python is the only language where
+tabulation rules must be strictly followed to make the program work.
 
 It's also a considered an object-oriented language suitable for many purposes.
 It has a clear, intuitive syntax, powerful high-level data structures, and a
 flexible dynamic type system \cite{An93pythonfor}.
 
 Python is often used to create terminal programs or web services because GUI
-are not supported by default but there are many frameworks that can be used,
+are not supported by default, but there are many frameworks that can be used,
 for instance, \textbf{Kivy}.
 
-\begin{codefigure}{Kivy hello world}{F:kivy-hello-world}
-	\pythonexternal{source/kivy_hello_world.py}
+\begin{codefigure}
+	\pythonexternal[
+		caption=Kivy hello world,
+		label=L:kivy-hello-world,
+	]{source/kivy_hello_world.py}
 \end{codefigure}
+
+As Listing \ref{L:kivy-hello-world} shows up, a window with is created with a
+button which text is "Hello World".
 
 \subsection{JavaScript}
 
 JavaScript is also a well know scripting programming language. It's used
-alongside with HTML and CSS as core technologies to make any webpages. But due
-to its flexibility is used on many other fields as game programming or desktop
-applications.
+alongside with HTML and CSS as core technologies to make any webpage. But due
+to its flexibility, it is used in many other fields like game programming or
+desktop applications.
 
-It has many interpreters but all of them has to fulfill ECMAScript 
+It has many interpreters but all of them has to fulfill ECMAScript
 specification. V8 is an example of JavaScript engine used in Google Chrome and
-Node.js. This latest is to build desktop applications in JavaScript.
+Node.js. This latter example is widely used to build terminal applications and
+web services.
 
-Developing trends of last years to create cross-platform applications were to 
-develop a web application because all platforms have browsers. For this reason,
-web technologies grow a lot but the problem is that the user experience of a
-web page will never be as good as using a desktop application.
+Some years ago, developing trends were to create web applications instead of
+desktop ones since it is easier and all platforms have browsers. For this
+reason, web technologies have grown a lot and today can be compared with
+desktop technologies.
+
+But the main problem of web applications is that user experience (UX) will
+never be as good as using a desktop application due to some screen space is
+lost because of browser menus. Furthermore, since its code is online, the
+application must be downloaded each time is loaded. This fact gives wait 
+periods that increase as the application grows.
 
 \subsubsection{Electron}
 
-Electron is a Node.js framework that lets you build cross-platform desktop apps
-with JavaScript, HTML, and CSS \cite{electron-web}. Since web technologies, due
-to web applications, has grown, now are able to race with other desktop
-technologies. The idea of Electron is to take profit of the fact that Node.js
-and Chrome use the same JavaScript engine to let Node instantiate browser
-windows that also run Node.js.
+Electron is a Node.js framework that lets developers build cross-platform
+desktop applications using JavaScript, HTML, and CSS \cite{electron-web}. As
+seen before, web technologies are now able to race desktop ones in terms of
+performance and scalability.
 
-So using Electron, developers are able to create cross-platform desktop 
-applications using the same technologies that the ones used to create a web
-page.
+The idea behind Electron is take profit of the fact that Node.js and Chrome use
+the same JavaScript engine (V8) to let Node.js instantiate Chrome windows and
+use them as user interface. Moreover, Electron Chrome windows are able to use
+all extra Node.js modules, for instance, to be able to access the computer's
+file system.
+
+UX is improved respect web pages because Chrome menus are removed and
+application code is now inside user's computer.
+
+For short, Electron help developers to create cross-platform desktop 
+applications using the same technologies that the ones used to create a webpage.
 
 \subsubsection{NW.js}
 
-NW.js, previously known as node-webkit, works on the contrary of Electron. It's
-a Chrome web browser where you can call all the node modules \cite{nwjs-web}.
-So the main difference is the entry point of the application. In Electron, the
-start point of your program execution is Node.js while on NW.js the entry point
-is an HTML file.
+NW.js, previously known as node-webkit, works on the contrary of Electron. It
+is just a Chrome web browser where you can call all the node modules
+\cite{nwjs-web}. So the main difference is the entry point of the application.
+In Electron, the start point of your program execution is Node.js while on
+NW.js the entry point is an HTML file.
+
+\subsection{Java}
+
+This well-known programming language is one of the most used to build
+cross-platform desktop applications due to its maturity. Java is a
+general-purpose, concurrent, classbased, object-oriented language and it is
+designed to be easy to learn in order to let many programmers to have fluency
+in the language \cite{java-8-specs}.
+
+Classic compiled languages, such as, C and C++, directly compile into machine
+code, which is directly interpreted by the hardware. As opposed to C and C++,
+Java can be considered a virtual machine programming language.
+
+\begin{codefigure}
+	\javaexternal[
+	caption=Java hello world,
+	label=L:java-hello-world,
+	%
+	classoffset=1,
+	morekeywords={HelloWorldApp}
+	]{source/HelloWorldApp.java}
+\end{codefigure}
+
+Listing \ref{L:java-hello-world} is an example of Java program that prints the
+test “Hello World!” into the terminal. All files must contain just one class and
+the name of the file must match. The function called main is the entry point of the application and in this example uses the standard output to print a message.
 
 \subsection{Haxe}
 
@@ -153,16 +203,19 @@ C\#				& Sourcecode		& Desktop, Mobile, Server   \\ \hline
 Table \ref{T:haxe-use-cases} shows up many languages in which Haxe can be
 compiled. Then lets see a bit of Haxe syntax.
 
-\begin{codefigure}{Haxe hello world}{F:haxe-hello-world}
+\begin{codefigure}
 	\haxeexternal[
+		caption=Haxe hello world,
+		label=L:haxe-hello-world,
+		%
 		classoffset=1,
 		morekeywords={Main}
 	]{source/Main.hx}
 \end{codefigure}
 
-As we can see in Figure \ref{F:haxe-hello-world}, Haxe can be typed defining 
-variables that way: \haxeinline{var text: String}. Then, this code can be
-compiled for example to Python other languages using the terminal command:
+As we can see in Listing \ref{L:haxe-hello-world}, Haxe can be typed defining 
+variables that way: \haxeinline{var text: String}. This code can be compiled
+for example to Python other languages using the terminal command:
 
 \begin{bashcode}
 	haxe -main Main.hx -python \textless\text{outfile.py}\textgreater
@@ -173,72 +226,88 @@ compiled for example to Python other languages using the terminal command:
 The technology that fits better with the project specifications is Electron. 
 There are several projects like this one that are developed using this 
 framework. Even it is not as mature as other ones it had a bit impact in the
-developers community.
+developers community. Figure \ref{F:electron-applications} shows several
+applications developed using Electron \cite{electron-web}.
 
-% TODO: PUT SOME EXAMPLES?? 
-% Visual Studio Code, Atom, Slack, Github Desktop
+\begin{figure}[htb]
+	\begin{center}
+		\begin{subfigmatrix}{4}
+			\subfigure[Visual Studio Code (Microsoft)]{
+				\includegraphics{./figures/visual-studio-code-icon.png}
+				\label{SF:S1}} 
+			\subfigure[Atom]
+			{\includegraphics{./figures/atom-icon.png}\label{SF:S1}} 
+			\subfigure[Github Desktop]
+			{\includegraphics{./figures/github-desktop-icon.png}\label{SF:S1}} 
+			\subfigure[Slack]
+			{\includegraphics{./figures/slack-icon.png}\label{SF:S1}} 
+		\end{subfigmatrix}
+		\caption{Electron application examples}
+		\label{F:electron-applications}
+	\end{center}
+\end{figure}
 
-Furthermore, the development of web applications has been evolved very fast with
+Moreover, the development of web applications has been evolved very fast with
 the objective to have complex programs with a very good scalability and without
 putting so much effort.
 
-Now lets see how it works a little more in detail. Complete code of following 
-examples can be seen on Appendix BLABLA
-
-% TODO: CREATE APPENDIX
+Then, some examples show how Electron works in a little more of detail.
+Complete code is available on Appendix \ref{APP:electron-hello-world}.
 
 \subsection{Main process}
 
-Since JavaScript is single threaded, to work in parallel Electron have several
-processes. The initial one is called main process. It in charge of create all
-browser windows, communicate them, to build application menus and control
-context events.
+JavaScript is a single threaded programming language. In order to be able to
+work in parallel, Electron have several processes. The initial one is called 
+main process. It is in charge of create all browser windows, communicate them,
+to build application menus and control context events.
 
-\begin{codefigure}{Electron app events}{F:electron-app-events}
-	\jsexternal{source/electron-app.js}
+\begin{codefigure}
+	\jsexternal[
+		caption=Electron app events,
+		label=L:electron-app-events
+	]{source/electron-app.js}
 \end{codefigure}
 
-Code of Figure \ref{F:electron-app-events} is an example of the most common
-handled events. The most important is the \textit{"ready"} event, which is in
-charge to create the main window of the application.
+Code of Listing \ref{L:electron-app-events} is an example of the most common
+handled events. The most important is the \textit{"ready"} event, where the
+main window of the application is created.
 
 \subsection{Browser window}
 
 Once event \textit{"ready"} is called, browser windows can be created. Each
-window have its own process and are called renderer processes. The way to
-create windows is shown on Figure \ref{F:electron-create-window}.
+window have its own independent process called renderer. The way to create
+windows is shown on Listing \ref{L:electron-create-window}.
 
-\begin{codefigure}{Electron window creation}{F:electron-create-window}
+\begin{codefigure}
 	\jsexternal[
-		classoffset=1,
-		morekeywords={BrowserWindow},
+		caption=Electron window creation,
+		label=L:electron-create-window,
 	]{source/electron-create-window.js}
 \end{codefigure}
 
 Browser windows can be created using several parameters to define its initial
-behavior, for instance: width, height, position, etc. Also, they can load files 
-using several protocols. In Electron, the most common way is to use local files
-to reduce the load time and let the application work without Internet 
-connection. And finally applications also have events, for example: 
-\textit{"closed"}, \textit{"ready-to-show"}, \textit{"move"}\dots
-
-\subsection{Menu and context menu}
-
-% TODO: DE MOMENTO NADA
+behavior, for instance: width, height, position, etc. They can load files  
+using several protocols (HTTP, FTP, etc) or directly access to local hard disk.
+In Electron, the most common way is to use local files to reduce load time and
+let the application work without Internet connection. Finally, window objects
+also have events, for example: \textit{"closed"}, \textit{"ready-to-show"},
+\textit{"move"}\dots
 
 \subsection{Interprocess communication}
 
 Finally, to be able to communicate the main process and renderer processes, 
-Electron provides an interprocess communication system (IPC). It can be both
-ways, main to renderer and renderer to main.
+Electron provides interprocess communication (IPC). By default, it can be main
+to renderer and renderer to main. Therefore, if renderer to renderer 
+communication is needed, a bridge must be implemented inside the main process.
 
-To communicate two renderer processes, a bridge must be created inside the 
-main process.
+% TODO: Pongo ejemplo de codigo de esto tambien? 
 
 \section{Web technologies}
 
-To improve project's scalability and maintainability several web technologies
-are used.
+Core World Wide Web technologies, as seen before, are JavaScript, HTML and CSS.
+But there are many other specialized tools thought to solve specific deficits 
+those technologies have. For instance, Typescript, SCSS and Gulp are used to
+enhance scalability and maintainability. 
 
 \subsection{Typescript}
 
@@ -248,41 +317,58 @@ created by Microsoft \cite{typescript-web}. It has two main advantages:
 \begin{description}
 	\item[Typed language]
 	Since Typescript is a typed language and it has a compilation process, any
-	mismatch of parameters in a function call can be detected. This is useful
-	to check if something is not well programmed before test the application.
-	
-	Also, Integrated Development Environments (IDEs) can help developers before
-	type mismatches happens because now this information is provided.
+	mismatch of parameters used in a function call are detected before testing
+	anything. Also, Integrated Development Environments (IDEs) can help
+	developers highlight those mismatches because type information is provided.
 	
 	\item[Compiles to plain Javascript]
-	There are many web browsers and not all of them are not providing the same
-	JavaScript functionalities. To use TypeScript allows developer to not take
-	care of it because is the compiler who chooses the proper JavaScript code.
+	There are many web browsers and not all of them support whole ECMAScript 
+	standard. Using TypeScript developers don't need to take care of it because
+	target JavaScript version can be selected.
 
 \end{description}
 
 Many JavaScript libraries also provide its TypeScript typings. Using this 
 information, the compiler can detect if the library is properly used.
 
-Each time TypeScript is compiled, a tool called TsLint can be used to
-check if some programming style guides are followed. They help to keep the code
-easy-to-read because some rules are used, for instance: the use of lower camel 
-case for variables and upper camel case for classes.
+
+\begin{codefigure}
+	\tsexternal[
+		caption=TypeScript example,
+		label=L:typescript-example,
+		%
+		classoffset=1,
+		morekeywords={Person, T, GreetingsCallback, Greetings}
+	]{source/hello-world.ts}
+\end{codefigure}
+
+Listing \ref{L:typescript-example} is a TypeScript example of some advanced
+type declarations. As it shows up, it supports templates, interfaces and even
+defining function types.
+
+Each time TypeScript is compiled, a tool called TsLint can be used to check if 
+some programming style guides are followed. Follow this rules, even if it is 
+not strongly needed, are very useful to keep code easy-to-read. For instance, 
+common one used in JavaScript is to name variables following lower camel case
+and upper camel case for classes.
 
 \subsection{Sass}
 
-Like Typescript is a code transcompiler, but it translates from sass to css. It
-is designed to improve CSS functionalities.
+Like Typescript, SASS is a code transcompiler, but it translates from SASS to
+CSS. It is designed to improve CSS functionalities.
 
-\begin{codefigure}{Sass example}{F:sass-example}
+\begin{codefigure}
 	\sassexternal[
+		caption=Sass example,
+		label=L:sass-example,
+		%
 		classoffset=2,
 		morekeywords={\$app_green, flex-row}
 	]{source/example.scss}
 \end{codefigure}
 
-Figure \ref{F:sass-example} helps to see all the advantages that Sass provides.
-The main of them are:
+Listing \ref{L:sass-example} helps to see all the advantages that SASS provides.
+The main ones are:
 
 \begin{description}
 	\item[Nesting CSS selectors]
@@ -292,11 +378,9 @@ The main of them are:
 	Helps to define palettes, sizes, etc.
 	
 	\item[Mixins]
-	They are similar to functions. Is very useful to define common behaviors.
+	Similar to functions. They are very useful to define common behaviors.
 	
 \end{description}
-
-% TODO: Explicar que se ha estructurado scss por componentes visuales??
 
 \subsection{Gulp}
 
@@ -305,7 +389,15 @@ development workflow, so you can stop messing around and build something
 \cite{gulp-web}.
 
 This project has several routine tasks, such as launch electron, compile
-Typescript and Sass each time a file change happens, etc. For this reason, 
+TypeScript and SASS each time a file change happens, etc. For this reason, 
 several gulp tasks to help development.
 
-% TODO: Poner un ejemplo de una tarea de gulp configurada??
+\begin{codefigure}
+	\jsexternal[
+		caption=Gulp task to compile SASS,
+		label=L:gulp-sass,
+	]{source/gulp-sass.js}
+\end{codefigure}
+
+For instance, Listing \ref{L:gulp-sass} shows how a task to compile all .sass 
+files is implemented.

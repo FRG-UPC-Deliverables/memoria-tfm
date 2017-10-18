@@ -1,14 +1,11 @@
 function appendItemReducer(state, action) {
+    if (!state) state = []; // Default state
+
     switch (action.type) {
         case "APPEND_ITEM":
-            return {
-                ...state,
-                items: [
-                    ...state.items,
-                    action.payload
-                ]};
+            return  [ ...state, action.payload ];
 
-        default:
+        default: // Return always the state!
             return state;
     }
 }
