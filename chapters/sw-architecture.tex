@@ -6,9 +6,10 @@
 “Most systems work better they are kept simple rather than complicated”
 \cite{kiss-wiki}. This is the main statement of the KISS principle, acronym for
 “Keep it simple, stupid”. KISS philosophy is very used on software development
-because code tends to chaos. If the implementation of a functionality is not
-properly thought, it adds complexity to the program work flow. Therefore, to
-reduce the architecture entropy is one of the main design patterns.
+because code tends to chaos and disorder. If the implementation of a
+functionality is not properly thought, it adds complexity to the program work
+flow. Therefore, to reduce the architecture entropy should be one of the main
+design patterns on any software.
 
 Model-View-Controller (MVC) is a well-known software architecture that consists
 on the use of this tree elements to build a user interface. It was introduced 
@@ -16,7 +17,7 @@ by Trygve Reenskaug in the seventies \cite{mvc-past-present}. When web
 applications appeared, this model was applied in many important projects
 like \href{https://support.microsoft.com}{Microsoft Support}. 
 
-% TODO: NO SE COMO PONER UNA WEB COMO EJEMPLO
+% TODO: NO SE COMO PONER UNA WEB COMO EJEMPLO: como cita o hipervinculo??
 
 \begin{figure}[htb]
 	\begin{center}
@@ -27,11 +28,11 @@ like \href{https://support.microsoft.com}{Microsoft Support}.
 	\end{center}
 \end{figure}
 
-As shown on Figure \ref{F:mvc}, it is a simple model to represent
-a user interface (UI). The UI visual representation is managed by the view.
-Each time the user performs an action, view notifies controller and it modifies
-the current model. Since view is watching it, the change is detected and view
-is affected.
+As shown on Figure \ref{F:mvc}, it is a simple model to represent a user
+interface (UI). What user sees is represented by the view. Each time the user 
+performs an action, view notifies controller and it modifies the current model.
+Since view is watching changes on the model, this change is detected and the 
+view is affected.
 
 The problem is that this architecture becomes complex and complex while 
 increasing the number of view. Actions from a view can affect other views'
@@ -46,12 +47,11 @@ generate unexpected loops as Figure \ref{F:mvc-complex} proves.
 	\end{center}
 \end{figure}
 
-\section{Flux-like architecture}
+\section{Flux architecture}
 
-In order solve the MVC scalability problem, Facebook proposed Flux
-\cite{flux-web}. Flux is the application architecture that Facebook uses for
-building client-side web applications. To solve the loop problem, they devise
-an “unidirectional data flow with changes described as plain objects”.
+In order solve the MVC scalability problem, Facebook launched Flux
+\cite{flux-web}. To solve the loop, an “unidirectional data flow with changes
+described as plain objects” was proposed.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -64,15 +64,15 @@ an “unidirectional data flow with changes described as plain objects”.
 Even through Figure \ref{F:flux} appears to have a loop, with Flux things are
 much easy to handle. View just wait change events produced by the store and
 render themselves using the current state information. Note that render
-processes do not need to call any action.
+processes must not call any action.
 
-\subsection{React}
+\section{React}
 
-React is an implementation of Flux view piece. It is a component-based 
+React is an implementation of Flux view block. It is a component-based 
 JavaScript library to build user interfaces \cite{react-web}. Each React
 component can have input properties and a state, and must implement a render
 function. Furthermore, to make things easier, React supports JSX which are
-JavaScript files where HTML code can be used.
+JavaScript files where HTML code can be directly used.
 
 
 \begin{codefigure}
@@ -87,10 +87,9 @@ JavaScript files where HTML code can be used.
 	]{source/react-hello-world.jsx}
 \end{codefigure}
 
-Listing \ref{L:react-hello-world} shows up an example of React component. It has
-a no state, a property call name and an easy render function to create a div.
-Render functions can also have components inside themselves. That way, React
-creates a component tree \ref{F:react-tree}.
+Listing \ref{L:react-hello-world} shows up an example of React component. It is stateless, it has a property call name and an easy render function to create a
+div with text. Render functions can also have components inside themselves. That
+way, React creates a component tree \ref{F:react-tree}.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -102,16 +101,16 @@ creates a component tree \ref{F:react-tree}.
 
 Components may need to perform actions. Those cannot be performed on render 
 function, as seen before. To do that, each component have a lifecyle. It 
-consists of a functions' set that are called when some external actions happen. 
-Most used ones are \textit{"componentWillMount"} and 
+consists of a set of functions that are triggered when some external actions 
+happen. Most used ones are \textit{"componentWillMount"} and 
 \textit{"componentWillUnmount"}. Components also can listen to its view
-elements to perform actions.
+element's events, for instance button clicks, to perform actions.
 
-\subsection{Redux}
+\section{Redux}
 
 Redux was inspired by several important qualities of Flux. Like Flux, Redux
-prescribes that you concentrate your model update logic in a certain layer of
-your application (“stores” in Flux, “reducers” in Redux) \cite{redux-prior-art}.
+prescribes that the model update logic is concentrated in a certain layer of
+the application (“stores” in Flux, “reducers” in Redux) \cite{redux-prior-art}.
 Redux have tree principles must be followed \cite{redux-principles}.
 
 \begin{description}
@@ -120,12 +119,13 @@ Redux have tree principles must be followed \cite{redux-principles}.
 	application will be easy to debug.
 	
 	\item [State is read-only]
-	The only way to modify the state is using actions. Each time the state
-	changes, a new state must be created.
+	The only way to update the state is using actions. Each time the state
+	changes, a new independent state must be created.
 
 	\item [Changes are made with pure functions]
-	Reducers must be pure functions, that means, using the same initial state,
-	repeating the same list of actions must produce the same final state.
+	Reducers must be pure functions, that results in the following statement:
+	"using the same initial state, repeating the same list of actions must
+	produce the same final state".
 
 \end{description}
 
@@ -138,22 +138,22 @@ Redux have tree principles must be followed \cite{redux-principles}.
 	\end{center}
 \end{figure}
 
-Figure \ref{F:redux-architecture} shows up the overall architecture of 
-Redux. First of all a store must be created. This store contains reducers that
-map action created by action creators into state changes. If needed, selectors
+Figure \ref{F:redux-architecture} shows up the overall Redux's architecture.
+First of all, a store must be created. This store contains reducers that map
+action, created by action creators, into state changes. If needed, selectors
 can be used to cache some state costly transformations. Store also exposes a
 subscription function to receive state change notifications.
 
-\subsubsection{Action creators}
+\subsection{Action creators}
 
 An action is a plain JavaScript object that contains a field called type to 
-identify it and other optional fields that are the payload. Same type of action
-can be created in many places of the code so it is extremely recommended to use
-action creators.
+identify it and other optional fields. Same type of action can be created in
+many places so it is extremely recommended to use action creators.
 
 Action creators are functions that create those objects. Normally are defined
 using lambdas. An example of action creator is shown on Listing
-\ref{L:redux-action-creator}.
+\ref{L:redux-action-creator}. This action creator is intended to create an
+action that appends a text item into the state.
 
 \begin{codefigure}
 	\jsexternal[
@@ -162,41 +162,42 @@ using lambdas. An example of action creator is shown on Listing
 	]{source/redux-action-creator.js}
 \end{codefigure}
 
-\subsubsection{Reducers}
+\subsection{Reducers}
 
 Reducers aim to return new states each time an action is produced. They must be
-implemented using pure functions. Tree statements must be followed.
+implemented using pure functions. A function must follow tree statements to be 
+considered pure.
 
 The fist one is \textbf{mapping}. To fulfill it means that same input always 
-returns the same output. Therefore, pure functions can not generate random
-numbers nor current date. If this statement is not followed, functions are
-difficult to test since its return value is unpredictable.
+results on the same output. Therefore, pure functions can not generate random
+numbers, current date, nor depend on external variables. If this statement is
+not followed, functions are difficult to test since its return value is
+unpredictable. To make a function fulfill mapping is as easy as adding 
+unpredictable values as parameters. Listing \ref{L:mapping-example} is an 
+example of function that multiplies a random value with a parameter.
 
-\begin{center}
-	\textbf{KO}: \jsinline{ const mult = (x) => Math.random() * x; }
-\end{center}
+\begin{codefigure}
+	\jsexternal[
+	caption=Mapping example,
+	label=L:mapping-example,
+	]{source/mapping.js}
+\end{codefigure}
 
-The way to fix this issue is simply adding this values as a parameter of the 
-function.
+The second statement is \textbf{avoid side effects}. This means that functions
+must not modify anything outside them. If a pure function needs to access
+outside, maybe it is ill-designed. 
 
-\begin{center}
-	\textbf{OK}: \jsinline{ const mult = (x, rnd) => rnd * x; }
-\end{center}
+\begin{codefigure}
+	\jsexternal[
+	caption=Avoid side effects example,
+	label=L:side-effects-example,
+	]{source/no-side-effects.js}
+\end{codefigure}
 
-The second statement is \textbf{Avoid side effects}. This means that function's
-code must not modify anything that don't belong to it.
-
-\begin{center}
-	\textbf{KO}: \jsinline{ const title = (x) => document.title = x; }
-\end{center}
-
-Removing side effects makes the application's flow easy to follow reducing
-complexity.
-
-And last but not least \textbf{No external mutable}. This means that the output
-of the function must be independent to changes once the value is retrieved. But
-how can this happen? Easy, when a JavaScript object is assigned to another
-variable, it is a reference, not a copy. If any of both variables changes, it
+And last \textbf{no external mutable}. This means that the output of a
+function must be independent to changes other variables. But how can this
+happen? Easy, when a JavaScript object is assigned to another variable, it is a
+reference of the first, not a copy. If any of both variables changes, it
 will affect also to the other. A simple example of this issue is shown on 
 Listing \ref{L:obj-ref}.
 
@@ -207,23 +208,21 @@ Listing \ref{L:obj-ref}.
 	]{source/obj-ref.js}
 \end{codefigure}
 
-Therefore, an example of non pure function due to no external mutation is:
+Therefore, an example of non pure function due to no external mutation is to
+return an object parameter. In order to follow no external mutable principle,
+the returned object must be a copy of the one provided as parameter.
 
-\begin{center}
-	\textbf{KO}: \jsinline{ const rename = (obj, val) => obj.name = val; }
-\end{center}
+\begin{codefigure}
+	\jsexternal[
+	caption=No external mutation example,
+	label=L:no-external-mutation,
+	]{source/no-external-mutation.js}
+\end{codefigure}
 
-The way to make this function follow no external mutable principle, the returned
-object must be a copy for the one provided as parameter.
 
-\begin{center}
-	\textbf{OK}: \jsinline{
-		const rename = (obj, val) => \{ ...obj, name: val \};
-	}
-\end{center}
-
-Then applying this three principles, Listing \ref{L:redux-reducer} shows up an
-example of reducer for action shown on Listing \ref{L:redux-action-creator}.
+Then, applying this three principles, Listing \ref{L:redux-reducer} shows up an
+example of reducer for the action created on Listing 
+\ref{L:redux-action-creator}.
 
 \begin{codefigure}
 	\jsexternal[
@@ -243,10 +242,10 @@ Reducers can be aggregated using a function provided by Redux called
 	]{source/redux-agg-reducers.js}
 \end{codefigure}
 
-\subsubsection{Selectors}
+\subsection{Selectors}
 \label{S:selectors}
 
-Selectors are pure functions that can cache the return value and it is just 
+Selectors are functions that can cache the return value and it is just 
 recomputed if any of the input parameters changes. For instance, a selector
 can be created to select items that starts with letter 'I'. This example is
 shown on Listing \ref{L:redux-selector}.
@@ -258,15 +257,15 @@ shown on Listing \ref{L:redux-selector}.
 	]{source/redux-selector.js}
 \end{codefigure}
 
-\subsubsection{Store}
+\subsection{Store}
 
 To create a store is as easy as provide the root reducer and the initial state.
 Then actions can be dispatched and a function can be subscribed to detect any
 state change.
 
-Listing \ref{L:redux-store} shows how to create a store. Also,
-selector created in Section \ref{S:selectors} is used to calculate the items'
-subset just if they have change. Also, several actions are dispatched.
+Listing \ref{L:redux-store} shows how to create a store. Selector created in
+Section \ref{S:selectors} is used to compute a subset of items just if the
+item list has change. Also, several actions are dispatched.
 
 \begin{codefigure}
 	\jsexternal[
@@ -275,7 +274,7 @@ subset just if they have change. Also, several actions are dispatched.
 	]{source/redux-store.js}
 \end{codefigure}
 
-\subsection{Action observables}
+\section{Action observables}
 
 Observables are data streams provided by a library called Reactive Extensions
 for JavaScript (rxjs). The idea is to treat those streams as asynchronous 
@@ -311,10 +310,17 @@ with Figure \ref{F:redux-observables-architecture}.
 	\end{center}
 \end{figure}
 
-\subsection{React-Redux}
+\section{React-Redux}
 
-To let React and Redux work together, Redux store must be provided inside React
-tree. Also, action creators and state have to be mapped into React properties.
+To let React and Redux work together, Redux store must be provided to whole
+React tree. Also, action creators and state have to be mapped into React
+properties.
+
+A package called react-redux adds a React component named \textit{"Provider"}
+that inserts a store inside the React tree. Children of \textit{"Provider"} can
+connect to it by using the \textit{"connect"} function. It needs two 
+parameters, one to map the store state to component's properties and a second 
+one to map actions.
 
 \begin{landscape}
 \begin{figure}[htp]
@@ -328,7 +334,7 @@ tree. Also, action creators and state have to be mapped into React properties.
 \end{figure}
 \end{landscape}
 
-\section{The Sleuth Kit JavaScript}
+
 
 
 

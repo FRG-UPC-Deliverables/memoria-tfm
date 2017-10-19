@@ -13,5 +13,5 @@ store.dispatch(appendItem("Item 2"));
 store.dispatch(appendItem("AnotherItem 1"));
 
 button.addEventListener("click", () => {
-		store.dispatch(increaseCounter());
+	store.dispatch(increaseCounter());
 });

@@ -1,4 +1,4 @@
-const appendItem = (item) => ({
+const appendItem = (text) => ({
     type: "APPEND_ITEM",
-    payload: item
+    payload: text
 });

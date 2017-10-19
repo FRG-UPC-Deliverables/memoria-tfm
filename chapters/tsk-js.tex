@@ -1,0 +1,43 @@
+\chapter{The Sleuth Kit JavaScript}
+
+The Sleuth Kit (TSK) is an open source cross-platform collection of terminal
+applications and a C library that allows investigators to analyze disk images
+and recover files from them \cite{tsk-web}. It is divided in file system and
+volume tools. 
+
+The fist group, file system tools, serve to examine the file system of a suspect
+computer in a non-intrusive way. Main file system tools are shown on Figure
+\ref{T:tsk-fs-tools}.
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+{\bf Command }	& {\bf Description }  \\ \hline \hline
+fsstat & Shows file system details and statistics \\ \hline \hline
+fls	& Lists allocated and deleted file names in a directory \\ \hline
+ffind & Finds allocated and unallocated file names \\ \hline \hline
+icat & Extracts the data units of a file \\ \hline
+\end{tabular}
+\caption{Main file system tools from TSK \cite{tsk-tools-wiki}}
+\label{T:tsk-fs-tools}
+\end{center}
+\end{table}
+
+Volume tools are in charge of the layout of disks and another media. They are
+needed to identify where partitions are located to be able to proceed with a
+file system analysis. Table \ref{T:tsk-v-tools} lists main volume tools.
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+{\bf Command }	& {\bf Description }  \\ \hline \hline
+mmls & Displays the layout of a disk \\ \hline \hline
+mmstat & Display details about a volume system \\ \hline
+\end{tabular}
+\caption{Main volume tools from TSK \cite{tsk-tools-wiki}}
+\label{T:tsk-v-tools}
+\end{center}
+\end{table}
+
