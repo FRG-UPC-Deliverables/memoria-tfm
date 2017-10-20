@@ -1,6 +1,6 @@
 \chapter{Cross-platform development}
 
-At the beginning of computers, each manufacturer had to decide how access to
+In the early begining of computers, each manufacturer had to decide how to access to
 their hardware functionalities. Since there were no standards for some cases,
 the first inter-compatibility problems started to appear because programs were
 not able to run on different computers.
@@ -14,13 +14,13 @@ Nowadays desktop applications are not programmed directly for a specific
 hardware. OS are in charge to expose an application programming interface (API)
 to access those functionalities.
 
-For a software, to be cross-platform means run over different OS. Since API
-exposed are not the equal, programs are not cross-platform by default.
+For a software, being cross-platform means being able to run on different OS. However, since the APIs
+exposed by the OSs are not equal, programs are not cross-platform by default.
 
 \section{Technological soup}
 
 Nowadays lots of technologies has been created aimed to writing just one code
-that runs in as many as platforms possible. The motivation to achieve this goal
+that runs in as many platforms as possible. The motivation to achieve this goal
 is obvious, to reduce the development cost. But, as opposed to this gain, it
 results in some performance reduction.
 
@@ -51,9 +51,9 @@ can make a specific translation to a compiled language depending on the OS.
 	\end{center}
 \end{figure}
 
-More than twenty years putting effort to solve this problem have created a 
+More than twenty years putting effort to solve this problem has created a 
 technological soup (Figure \ref{F:tech-soup}). Qt, Python, JavaScript, Java and 
-Haxe are some examples among many others.
+Haxe ***REFS*** are some examples among many others.
 
 \subsection{Qt}
 
@@ -80,7 +80,7 @@ Python is an example of a scripting programming language. The main design rule
 was to be very easy to read. For this reason, Python is the only language where
 tabulation rules must be strictly followed to make the program work.
 
-It's also a considered an object-oriented language suitable for many purposes.
+It is also considered an object-oriented language suitable for many purposes.
 It has a clear, intuitive syntax, powerful high-level data structures, and a
 flexible dynamic type system \cite{An93pythonfor}.
 
@@ -100,8 +100,8 @@ button which text is "Hello World".
 
 \subsection{JavaScript}
 
-JavaScript is also a well know scripting programming language. It's used
-alongside with HTML and CSS as core technologies to make any webpage. But due
+JavaScript is also a well-know widely-used scripting programming language. It is commonly used
+alongside with HTML and CSS as core technologies to make webpages. Moreover, due
 to its flexibility, it is used in many other fields like game programming or
 desktop applications.
 
@@ -111,7 +111,7 @@ Node.js. This latter example is widely used to build terminal applications and
 web services.
 
 Some years ago, developing trends were to create web applications instead of
-desktop ones since it is easier and all platforms have browsers. For this
+desktop ones since it was easier and all platforms have browsers indeed. For this
 reason, web technologies have grown a lot and today can be compared with
 desktop technologies.
 
@@ -119,7 +119,7 @@ But the main problem of web applications is that user experience (UX) will
 never be as good as using a desktop application due to some screen space is
 lost because of browser menus. Furthermore, since its code is online, the
 application must be downloaded each time is loaded. This fact gives wait 
-periods that increase as the application grows.
+periods that increase as the application grows. *** what about chrome/chromium apps, is it the same?***
 
 \subsubsection{Electron}
 
@@ -152,7 +152,7 @@ NW.js the entry point is an HTML file.
 
 This well-known programming language is one of the most used to build
 cross-platform desktop applications due to its maturity. Java is a
-general-purpose, concurrent, classbased, object-oriented language and it is
+general-purpose, concurrent, class-based, object-oriented language and it is
 designed to be easy to learn in order to let many programmers to have fluency
 in the language \cite{java-8-specs}.
 
@@ -225,7 +225,7 @@ for example to Python other languages using the terminal command:
 
 The technology that fits better with the project specifications is Electron. 
 There are several projects like this one that are developed using this 
-framework. Even it is not as mature as other ones it had a bit impact in the
+framework. Even it is probably not as mature as other ones, it had a bit impact in the
 developers community. Figure \ref{F:electron-applications} shows several
 applications developed using Electron \cite{electron-web}.
 
@@ -256,8 +256,8 @@ Complete code is available on Appendix \ref{APP:electron-hello-world}.
 
 \subsection{Main process}
 
-JavaScript is a single threaded programming language. In order to be able to
-work in parallel, Electron have several processes. The initial one is called 
+JavaScript is a single threaded programming language *** COMOR?!***. In order to be able to
+work in parallel, Electron has several processes. The initial one is called 
 main process. It is in charge of create all browser windows, communicate them,
 to build application menus and control context events.
 
@@ -275,7 +275,7 @@ main window of the application is created.
 \subsection{Browser window}
 
 Once event \textit{"ready"} is called, browser windows can be created. Each
-window have its own independent process called renderer. The way to create
+window has its own independent process called renderer. The way to create
 windows is shown on Listing \ref{L:electron-create-window}.
 
 \begin{codefigure}
@@ -295,17 +295,18 @@ also have events, for example: \textit{"closed"}, \textit{"ready-to-show"},
 
 \subsection{Interprocess communication}
 
-Finally, to be able to communicate the main process and renderer processes, 
-Electron provides interprocess communication (IPC). By default, it can be main
-to renderer and renderer to main. Therefore, if renderer to renderer 
+Finally, to be able to communicate the main process and the renderer processes, 
+Electron provides inter-process communication (IPC). By default, it can provide
+communications main-to-renderer and renderer-to-main. Therefore, if renderer-to-renderer 
 communication is needed, a bridge must be implemented inside the main process.
 
 % TODO: Pongo ejemplo de codigo de esto tambien? 
+% TODO: dependiendo del número final de páginas
 
 \section{Web technologies}
 
 Core World Wide Web technologies, as seen before, are JavaScript, HTML and CSS.
-But there are many other specialized tools thought to solve specific deficits 
+Nevertheless, there are many other specialized tools to solve specific deficits 
 those technologies have. For instance, Typescript, SCSS and Gulp are used to
 enhance scalability and maintainability. 
 
