@@ -2,12 +2,11 @@
 \phantomsection
 \chapter*{Introduction}
 
-% TODO: REVISAR
-Nowadays it's impossible to think our daily lifes without digital technologies. They
-are involved in most of our daily actions, such as, to talk with friends, to
-read news, documents transport and entertainment. For this reason, our
-electronic devices can be considered as digital sources of information that
-can even prove possible alibis.
+Nowadays it is impossible to think our daily lifes without digital
+technologies. They are involved in most of our daily actions, such as, to talk
+with friends, to read news, documents transport and entertainment. For this
+reason, our electronic devices can be considered as digital sources of 
+information that can even prove possible alibis.
 
 Digital forensics science, or digital forensics, is defined as:
 
@@ -37,16 +36,22 @@ There are many ways to do this analysis, but the more generic one presented in
 
 	\item [Acquisition \& Preservation]
 		Once everything is prepared, now the investigator can acquire 
-		the data. An image and a digest of the analyzed data have to be computed.
-		The image is an exact copy of the data and the digest is the result of a fixed-size unidirectional funcion, called hash, 
-		that summarizes the image. Among other properties, a hash funtion must be collusion-resistant; that is to say, that it has to be computationally infeasible to find two images with the same digest or to modify a image in such a way the digest remains the same.
+		the data. An image and a digest of the analyzed data have to be
+		computed. The image is an exact copy of the data and the digest is the
+		result of a fixed-size unidirectional funcion, called hash, 
+		that summarizes the image. Among other properties, a hash funtion must
+		be collusion-resistant; that is to say, that it has to be
+		computationally infeasible to find two images with the same digest or
+		to modify a image in such a way the digest remains the same.
 
 		That way, if anyone modifies the image and the digest is computed
 		again using the modified image, a different value will be 
 		retrieved. So this procedure stands to guarantee the proof 
 		integrity.
 		
-		Although not very formal, in the rest of the document we will use the term hash to refer to both the hash function and the digest (the result of the hash function), for it is the most widely way of using it.
+		Although not very formal, in the rest of the document we will use the
+		term hash to refer to both the hash function and the digest (the result
+		of the hash function), for it is the most widely way of using it.
 
 	\item [Analysis]
 		This is the main phase of the investigation. It consists on extracting
@@ -60,8 +65,8 @@ There are many ways to do this analysis, but the more generic one presented in
 		suspect has to be proven or refused.
 
 	\item [Post-Process]
-		Physical and digital proofs or evidences have to be returned and a report 
-		must be written to finish the case.
+		Physical and digital proofs or evidences have to be returned and a
+		report must be written to finish the case.
 
 \end{description}
 
@@ -77,7 +82,32 @@ and recover files from them. The Sleuth Kit team also developed
 \textbf{Autopsy}, which is a Windows' user interface to efficiently analyze
 hard drives and smart phones.
 
-Due to the lack of open-source cross-platform tools with a friendly user interface, the
-objective of this project is to develop one that eases the forensic analysts' task addressing from the very beginning the main functionalities of a 
-digital forensics software. The start point is to use The Sleuth Kit's C
-library ***REF*** since it is a cross-platform very-mature project.
+Due to the lack of open-source cross-platform tools with a friendly user
+interface, the objective of this project is to develop one that eases the
+forensic analysts' task addressing from the very beginning the main
+functionalities of a digital forensics software. The start point is to use The
+Sleuth Kit's C library  \cite{tsk-web} since it is a cross-platform very-mature
+project.
+
+In order to achieve this goal, \textit{Cross-platform development} (Chapter
+\ref{S:cp-develompent}) will explain \textbf{why not all applications are
+cross-platforms} and will show several options to build one. Finally, will talk
+a little more in detail about the one that fits better with this project,
+Electron \cite{electron-web}.
+
+After the technological environment is decided, \textit{Software architecture}
+(Chapter \ref{S:architecture}) talks about the evolution of 
+model-view-controller to flux architecture and how it is implemented \textbf{to 
+create a scalable application}.
+
+\textit{Digital forensics analysis} (Chapter \ref{S:df-analysis}) get deeper in
+how a digital forensics analysis can be done using The Sleuth Kit toolkit. Then,
+it explains the development of an important part of this project, \textbf{The
+Sleuth Kit JavaScript} (TSK-js), with a Node.js \cite{nodejs-web} C wrapper
+that gives access to The Sleuth Kit functionalities on Node.js.
+
+Finally, \textbf{\textit{Img-spy}} (Chapter \ref{S:img-spy}) is the name of
+\textbf{the application that fulfills this project objective}. It starts with a
+tour using the application and ends explaining some difficult or interesting
+parts of the development.
+

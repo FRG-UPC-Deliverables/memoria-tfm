@@ -1,4 +1,5 @@
 \chapter{Cross-platform development}
+\label{S:cp-develompent}
 
 In the early begining of computers, each manufacturer had to decide how to access to
 their hardware functionalities. Since there were no standards for some cases,
@@ -8,7 +9,7 @@ not able to run on different computers.
 When Operative Systems (OS) appeared, they started to use drivers. A driver is
 an interface that maps logic functions (for instance, turn on a led) to hardware
 operations (short circuit some part of the electronics). Those drivers are
-provided by manufacturers to let its hardware work when using an OS.
+often provided by manufacturers to let its hardware work when using an OS.
 
 Nowadays desktop applications are not programmed directly for a specific 
 hardware. OS are in charge to expose an application programming interface (API)
@@ -51,23 +52,29 @@ can make a specific translation to a compiled language depending on the OS.
 	\end{center}
 \end{figure}
 
+
 More than twenty years putting effort to solve this problem has created a 
 technological soup (Figure \ref{F:tech-soup}). Qt, Python, JavaScript, Java and 
-Haxe ***REFS*** are some examples among many others.
+Haxe
+\cite{qt-web}\cite{py-web}\cite{js-wiki}\cite{what-is-java}\cite{what-is-haxe}
+are some examples among many others.
+
+% TODO: Refs de muchos¿? Pongo las referencias de todos donde pone que es 
+% cross platform??
 
 \subsection{Qt}
 
 Qt is a complete cross-platform software framework with ready-made UI elements,
-C++ libraries, and a complete integrated development environment with tools for 
+\CC libraries, and a complete integrated development environment with tools for 
 everything you need to develop software for any project \cite{qt-web}.
 
 \begin{codefigure}
 	\cppexternal[
-	caption=Qt hello world,
-	label=L:qt-hello-world,
-	%
-	classoffset=1,
-	morekeywords={QPushButton, QApplication}
+		caption=Qt hello world,
+		label=L:qt-hello-world,
+		%
+		classoffset=1,
+		morekeywords={QPushButton, QApplication}
 	]{source/qt_hello_world.cpp}
 \end{codefigure}
 
@@ -107,19 +114,28 @@ desktop applications.
 
 It has many interpreters but all of them has to fulfill ECMAScript
 specification. V8 is an example of JavaScript engine used in Google Chrome and
-Node.js. This latter example is widely used to build terminal applications and
-web services.
+Node.js \cite{nodejs-web}. This latter example is widely used to build terminal
+applications and web services.
 
 Some years ago, developing trends were to create web applications instead of
-desktop ones since it was easier and all platforms have browsers indeed. For this
-reason, web technologies have grown a lot and today can be compared with
-desktop technologies.
+desktop ones since it has less development cost and all platforms have browsers
+indeed. For this reason, web technologies have grown a lot and today can be
+compared with desktop technologies.
 
-But the main problem of web applications is that user experience (UX) will
-never be as good as using a desktop application due to some screen space is
-lost because of browser menus. Furthermore, since its code is online, the
-application must be downloaded each time is loaded. This fact gives wait 
-periods that increase as the application grows. *** what about chrome/chromium apps, is it the same?***
+But web applications have several technological problems. The main one is that
+since the code is download from an external non-trusted source, the browser
+must limit the access to the computer for security reasons
+\cite{securing-your-browser}. For instance, web applications can not read the
+user's file system. Moreover, programs have higher load periods due to those
+downloads.
+
+Another important fact is that user experience (UX) will never be as good as
+using a desktop application due to it is embedded inside the browser and some
+space is lost due to menus.
+
+% TODO: *** what about chrome/chromium apps, is it the same?***
+% Respuesta: Realmente lo problematico es que el JavaScript del browser
+% es mas limitado.
 
 \subsubsection{Electron}
 
@@ -128,7 +144,7 @@ desktop applications using JavaScript, HTML, and CSS \cite{electron-web}. As
 seen before, web technologies are now able to race desktop ones in terms of
 performance and scalability.
 
-The idea behind Electron is take profit of the fact that Node.js and Chrome use
+The idea behind Electron is take profit of the fact that Node.js and Chrome uses
 the same JavaScript engine (V8) to let Node.js instantiate Chrome windows and
 use them as user interface. Moreover, Electron Chrome windows are able to use
 all extra Node.js modules, for instance, to be able to access the computer's
@@ -156,8 +172,8 @@ general-purpose, concurrent, class-based, object-oriented language and it is
 designed to be easy to learn in order to let many programmers to have fluency
 in the language \cite{java-8-specs}.
 
-Classic compiled languages, such as, C and C++, directly compile into machine
-code, which is directly interpreted by the hardware. As opposed to C and C++,
+Classic compiled languages, such as, C and \CC, directly compile into machine
+code, which is directly interpreted by the hardware. As opposed to C and \CC,
 Java can be considered a virtual machine programming language.
 
 \begin{codefigure}
@@ -172,7 +188,9 @@ Java can be considered a virtual machine programming language.
 
 Listing \ref{L:java-hello-world} is an example of Java program that prints the
 test “Hello World!” into the terminal. All files must contain just one class and
-the name of the file must match. The function called main is the entry point of the application and in this example uses the standard output to print a message.
+the name of the file must match. The static function called main is the entry
+point of the application and in this example uses the standard output to print
+a message.
 
 \subsection{Haxe}
 
@@ -189,7 +207,7 @@ JavaScript		& Sourcecode		& Browser, Desktop, Mobile, Server \\ \hline
 Neko			& Bytecode			& Desktop, Server   \\ \hline
 PHP				& Sourcecode		& Server   \\ \hline
 Python			& Sourcecode		& Desktop, Server   \\ \hline
-C++				& Sourcecode		& Desktop, Mobile, Server   \\ \hline
+\CC				& Sourcecode		& Desktop, Mobile, Server   \\ \hline
 ActionScript 3	& Sourcecode		& Browser, Desktop, Mobile   \\ \hline
 Flash			& Bytecode			& Browser, Desktop, Mobile   \\ \hline
 Java			& Sourcecode		& Desktop, Server   \\ \hline
@@ -217,24 +235,28 @@ As we can see in Listing \ref{L:haxe-hello-world}, Haxe can be typed defining
 variables that way: \haxeinline{var text: String}. This code can be compiled
 for example to Python other languages using the terminal command:
 
-\begin{bashcode}
-	haxe -main Main.hx -python \textless\text{outfile.py}\textgreater
-\end{bashcode}
+\begin{terminal}[caption=Haxe python transcompilation command, label=haxe-2-py]
+%
+\terminalcmd[haxe -main Main.hx -python main.py]
+%
+%\terminalcmd%
+
+\end{terminal}
 
 \section{Electron}
+\label{S:electron}
 
-The technology that fits better with the project specifications is Electron. 
+The technology that fits better with the project's specifications is Electron. 
 There are several projects like this one that are developed using this 
-framework. Even it is probably not as mature as other ones, it had a bit impact in the
-developers community. Figure \ref{F:electron-applications} shows several
+framework. Even it is probably not as mature as other ones, it had a big impact 
+in the developers community. Figure \ref{F:electron-applications} shows several
 applications developed using Electron \cite{electron-web}.
 
 \begin{figure}[htb]
 	\begin{center}
 		\begin{subfigmatrix}{4}
-			\subfigure[Visual Studio Code (Microsoft)]{
-				\includegraphics{./figures/visual-studio-code-icon.png}
-				\label{SF:S1}} 
+			\subfigure[Visual Studio Code (Microsoft)]
+			{\includegraphics{./figures/vs-code-icon.png}\label{SF:S1}} 
 			\subfigure[Atom]
 			{\includegraphics{./figures/atom-icon.png}\label{SF:S1}} 
 			\subfigure[Github Desktop]
@@ -256,7 +278,17 @@ Complete code is available on Appendix \ref{APP:electron-hello-world}.
 
 \subsection{Main process}
 
-JavaScript is a single threaded programming language *** COMOR?!***. In order to be able to
+% TODO: NO ENTIENDO EL COMOR?! jajaja
+% JavaScript solo tiene un tread pero puedes tener muchos procesos en paralelo
+% para hacer cosas a la vez. Osea:
+%    - En C y Java puedes utilizar semaforos para acceder a memoria comparida.
+%    - En javascript tienes que utilizar mecanismos de comunicacion como si
+%      fueran aplicaciones diferentes.
+% Otra cosa seria que desde un lenguaje multithreaded lances varios threads 
+% corriendo javascript o que un modulo javascript hecho en C aplique 
+% multithread.
+
+JavaScript is a single threaded programming language. In order to be able to
 work in parallel, Electron has several processes. The initial one is called 
 main process. It is in charge of create all browser windows, communicate them,
 to build application menus and control context events.
@@ -297,8 +329,9 @@ also have events, for example: \textit{"closed"}, \textit{"ready-to-show"},
 
 Finally, to be able to communicate the main process and the renderer processes, 
 Electron provides inter-process communication (IPC). By default, it can provide
-communications main-to-renderer and renderer-to-main. Therefore, if renderer-to-renderer 
-communication is needed, a bridge must be implemented inside the main process.
+communications main-to-renderer and renderer-to-main. Therefore, if
+renderer-to-renderer communication is needed, a bridge must be implemented
+inside the main process.
 
 % TODO: Pongo ejemplo de codigo de esto tambien? 
 % TODO: dependiendo del número final de páginas
@@ -312,8 +345,9 @@ enhance scalability and maintainability.
 
 \subsection{Typescript}
 
-Typescript is typed superset of JavaScript that compiles to plain JavaScript
-created by Microsoft \cite{typescript-web}. It has two main advantages:
+Typescript\cite{typescript-web} is a programming language created by Microsoft
+that is a typed superset of JavaScript that compiles to plain JavaScript. It has
+two main advantages:
 
 \begin{description}
 	\item[Typed language]
@@ -323,7 +357,7 @@ created by Microsoft \cite{typescript-web}. It has two main advantages:
 	developers highlight those mismatches because type information is provided.
 	
 	\item[Compiles to plain Javascript]
-	There are many web browsers and not all of them support whole ECMAScript 
+	There are many web browsers and not all of them support current ECMAScript 
 	standard. Using TypeScript developers don't need to take care of it because
 	target JavaScript version can be selected.
 
@@ -331,7 +365,6 @@ created by Microsoft \cite{typescript-web}. It has two main advantages:
 
 Many JavaScript libraries also provide its TypeScript typings. Using this 
 information, the compiler can detect if the library is properly used.
-
 
 \begin{codefigure}
 	\tsexternal[
@@ -343,19 +376,19 @@ information, the compiler can detect if the library is properly used.
 	]{source/hello-world.ts}
 \end{codefigure}
 
-Listing \ref{L:typescript-example} is a TypeScript example of some advanced
-type declarations. As it shows up, it supports templates, interfaces and even
-defining function types.
+Listing \ref{L:typescript-example} is a TypeScript example that shows some
+advanced type declarations. As can be seen, it supports templates, interfaces
+and even defining function types.
 
 Each time TypeScript is compiled, a tool called TsLint can be used to check if 
 some programming style guides are followed. Follow this rules, even if it is 
-not strongly needed, are very useful to keep code easy-to-read. For instance, 
-common one used in JavaScript is to name variables following lower camel case
+not strongly needed, is very useful to keep code easy-to-read. For instance, 
+a common rule used in JavaScript is to name variables following lower camel case
 and upper camel case for classes.
 
 \subsection{Sass}
 
-Like Typescript, SASS is a code transcompiler, but it translates from SASS to
+Like TypeScript, SASS is a code transcompiler, but it translates from SASS to
 CSS. It is designed to improve CSS functionalities.
 
 \begin{codefigure}
@@ -374,12 +407,12 @@ The main ones are:
 \begin{description}
 	\item[Nesting CSS selectors]
 	Improves code scalability. 
-	
+
 	\item[Variables]
 	Helps to define palettes, sizes, etc.
 	
 	\item[Mixins]
-	Similar to functions. They are very useful to define common behaviors.
+	Similar to functions, they are very useful to define common behaviors.
 	
 \end{description}
 
@@ -391,7 +424,7 @@ development workflow, so you can stop messing around and build something
 
 This project has several routine tasks, such as launch electron, compile
 TypeScript and SASS each time a file change happens, etc. For this reason, 
-several gulp tasks to help development.
+several gulp tasks are created to help development.
 
 \begin{codefigure}
 	\jsexternal[

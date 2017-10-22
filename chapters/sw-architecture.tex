@@ -1,4 +1,5 @@
 \chapter{Software architecture}
+\label{S:architecture}
 
 % TODO: En este apartado empiezo a poner diagramas, los pongo a color o
 % mejor en blanco y negro??
@@ -30,12 +31,12 @@ like \href{https://support.microsoft.com}{Microsoft Support}.
 
 As shown on Figure \ref{F:mvc}, it is a simple model to represent a user
 interface (UI). What user sees is represented by the view. Each time the user 
-performs an action, view notifies controller and it modifies the current model.
-Since view is watching changes on the model, this change is detected and the 
-view is affected.
+performs an action, view notifies the controller and it modifies the current
+model. Since view is watching changes on the model, this change is detected and,
+thus, view is affected.
 
 The problem is that this architecture becomes complex and complex while 
-increasing the number of view. Actions from a view can affect other views'
+increasing the number of views. Actions from a view can affect other views'
 model and this changes can trigger other actions. This complexity could even
 generate unexpected loops as Figure \ref{F:mvc-complex} proves.
 
@@ -49,9 +50,10 @@ generate unexpected loops as Figure \ref{F:mvc-complex} proves.
 
 \section{Flux architecture}
 
-In order solve the MVC scalability problem, Facebook launched Flux
-\cite{flux-web}. To solve the loop, an “unidirectional data flow with changes
-described as plain objects” was proposed.
+In order solve the MVC scalability problem, Facebook launched Flux, represented
+on Figure \ref{F:flux}. Now views are watching a plain object (state) saved
+inside the store. Actions are also plain objects that are dispatched changing
+the current stored state.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -61,19 +63,17 @@ described as plain objects” was proposed.
 	\end{center}
 \end{figure}
 
-Even through Figure \ref{F:flux} appears to have a loop, with Flux things are
-much easy to handle. View just wait change events produced by the store and
-render themselves using the current state information. Note that render
-processes must not call any action.
+Even through views just wait change events produced by the store and render
+themselves using the current state information. Note that the render processes
+must not call any action.
 
 \section{React}
 
 React is an implementation of Flux view block. It is a component-based 
 JavaScript library to build user interfaces \cite{react-web}. Each React
-component can have input properties and a state, and must implement a render
-function. Furthermore, to make things easier, React supports JSX which are
+component can have input properties, state, and must implement a render
+function. Moreover, to make things easier, React supports JSX which are
 JavaScript files where HTML code can be directly used.
-
 
 \begin{codefigure}
 	\jsxexternal[
@@ -87,9 +87,10 @@ JavaScript files where HTML code can be directly used.
 	]{source/react-hello-world.jsx}
 \end{codefigure}
 
-Listing \ref{L:react-hello-world} shows up an example of React component. It is stateless, it has a property call name and an easy render function to create a
-div with text. Render functions can also have components inside themselves. That
-way, React creates a component tree \ref{F:react-tree}.
+Listing \ref{L:react-hello-world} shows up an example of React component. It is
+stateless, it has a property call name and an easy render function to create a
+\textit{div} with text. Render functions can also have components inside
+themselves. That way, React creates a component tree \ref{F:react-tree}.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -100,11 +101,11 @@ way, React creates a component tree \ref{F:react-tree}.
 \end{figure}
 
 Components may need to perform actions. Those cannot be performed on render 
-function, as seen before. To do that, each component have a lifecyle. It 
-consists of a set of functions that are triggered when some external actions 
+function, as seen before. Instead, to do that each component have a lifecyle.
+It consists of a set of functions that are triggered when some external events
 happen. Most used ones are \textit{"componentWillMount"} and 
 \textit{"componentWillUnmount"}. Components also can listen to its view
-element's events, for instance button clicks, to perform actions.
+events, for instance button clicks, to perform actions.
 
 \section{Redux}
 
@@ -116,7 +117,7 @@ Redux have tree principles must be followed \cite{redux-principles}.
 \begin{description}
 	\item [Single source of truth]
 	The state can be stored easily if just one store is used. Furthermore, the
-	application will be easy to debug.
+	application will be easy to debug. Once again, keep it simple.
 	
 	\item [State is read-only]
 	The only way to update the state is using actions. Each time the state
@@ -129,7 +130,6 @@ Redux have tree principles must be followed \cite{redux-principles}.
 
 \end{description}
 
-
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]{./figures/redux.png}
@@ -141,8 +141,8 @@ Redux have tree principles must be followed \cite{redux-principles}.
 Figure \ref{F:redux-architecture} shows up the overall Redux's architecture.
 First of all, a store must be created. This store contains reducers that map
 action, created by action creators, into state changes. If needed, selectors
-can be used to cache some state costly transformations. Store also exposes a
-subscription function to receive state change notifications.
+can be used to cache some state costly transformations. Store also lets 
+to subscribe to state change notifications.
 
 \subsection{Action creators}
 
@@ -152,8 +152,8 @@ many places so it is extremely recommended to use action creators.
 
 Action creators are functions that create those objects. Normally are defined
 using lambdas. An example of action creator is shown on Listing
-\ref{L:redux-action-creator}. This action creator is intended to create an
-action that appends a text item into the state.
+\ref{L:redux-action-creator}. This one is intended to create an action that
+appends a text item into the state.
 
 \begin{codefigure}
 	\jsexternal[
@@ -194,10 +194,10 @@ outside, maybe it is ill-designed.
 	]{source/no-side-effects.js}
 \end{codefigure}
 
-And last \textbf{no external mutable}. This means that the output of a
+The last one is \textbf{no external mutable}. This means that the output of a
 function must be independent to changes other variables. But how can this
 happen? Easy, when a JavaScript object is assigned to another variable, it is a
-reference of the first, not a copy. If any of both variables changes, it
+reference of the first one, not a copy. If any of both variables changes, it
 will affect also to the other. A simple example of this issue is shown on 
 Listing \ref{L:obj-ref}.
 
@@ -210,7 +210,8 @@ Listing \ref{L:obj-ref}.
 
 Therefore, an example of non pure function due to no external mutation is to
 return an object parameter. In order to follow no external mutable principle,
-the returned object must be a copy of the one provided as parameter.
+the returned object must be a copy of the one provided as parameter (Figure
+\ref{L:no-external-mutation}).
 
 \begin{codefigure}
 	\jsexternal[
@@ -218,7 +219,6 @@ the returned object must be a copy of the one provided as parameter.
 	label=L:no-external-mutation,
 	]{source/no-external-mutation.js}
 \end{codefigure}
-
 
 Then, applying this three principles, Listing \ref{L:redux-reducer} shows up an
 example of reducer for the action created on Listing 
@@ -231,7 +231,7 @@ example of reducer for the action created on Listing
 	]{source/redux-reducer.js}
 \end{codefigure}
 
-This function in called by the store each time an action is dispatched. 
+This function is called by the store each time an action is dispatched. 
 Reducers can be aggregated using a function provided by Redux called
 \textit{"combineReducers"}. Listing \ref{L:redux-agg-reducers} shows an example.
 
@@ -278,7 +278,7 @@ item list has change. Also, several actions are dispatched.
 
 Observables are data streams provided by a library called Reactive Extensions
 for JavaScript (rxjs). The idea is to treat those streams as asynchronous 
-events and apply fluent query operators.
+events and apply fluent query operators to describe behaviors.
 
 \begin{codefigure}
 	\jsexternal[

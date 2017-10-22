@@ -1,19 +1,31 @@
-%%% MOVE THIS TO MACRO FILE?? %%%
+% Listing toc configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\let\Chapter\chapter
+\def\chapter{\addtocontents{lol}{\protect\addvspace{10pt}}\Chapter}
 
 % Colors %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Green
 \definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\definecolor{olivedrab}{RGB}{94,140,34}
+
+% Gray
+\definecolor{sirocco}{RGB}{114,128,131}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
+
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{deepblue}{rgb}{0,0,0.5}
 \definecolor{deepred}{rgb}{0.6,0,0}
-\definecolor{deepgreen}{rgb}{0,0.5,0}
 
 \definecolor{deepviolet}{RGB}{121, 8, 125}
 
+% Blue
 \definecolor{gigas}{RGB}{72, 62, 170}
 \definecolor{pictonblue}{RGB}{62, 193, 233}
 \definecolor{turquoiseblue}{RGB}{64, 224, 208}
+\definecolor{bluebayoux}{RGB}{87,115,131}
+\definecolor{funblue}{RGB}{25,78,155}
 
 \definecolor{saffron}{rgb}{0.372,0.211,0.988}
 \definecolor{rawsienna}{rgb}{0.819,0.576,0.255}
@@ -23,19 +35,24 @@
 
 % Custom macros %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\lstdefinestyle{defaults}{
+	basicstyle=\footnotesize\ttfamily,
+	captionpos=b,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	numbers=left,
+	numberstyle=\footnotesize,
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3,
+	escapechar=\%,
+}
 \newcommand{\lstcustomdefaults}{
 	\setkeys{lst}{
-		basicstyle=\footnotesize\ttfamily,
-	 	captionpos=b,
-		aboveskip=3mm,
-		belowskip=3mm,
-		showstringspaces=false,
-		columns=flexible,
-		numbers=left,
-		numberstyle=\footnotesize,
-		breaklines=true,
-		breakatwhitespace=true,
-		tabsize=3,
+		style=defaults
 	}
 }
 \newcommand{\newproglanguage}[2]{
@@ -44,7 +61,7 @@
 		\lstcustomdefaults
 		\setkeys{lst}{##1}
 	}
-	
+
 	\lstnewenvironment{#1}[1][]
 	{
 		\expandafter\csname #1style\endcsname
@@ -71,13 +88,54 @@
 	\end{quote}
 }
 
+%% Terminal
+\newcommand{\termuser}{user}
+\newcommand{\termhost}{host}
+\newcommand{\termdir}{/home/user}
+\newcommand{\terminalcmd}[1][]{%
+\textbf{%
+	{\color{olivedrab} \termuser\text{@}\termhost:}%
+	{\color{funblue} \termdir}}\$ #1
+}
+
+\lstnewenvironment{terminal}[1][]{
+	\lstset{
+		style=defaults,
+		backgroundcolor=\color{black},
+		basicstyle=\footnotesize\ttfamily\color{white},
+		captionpos=b,
+		numbers=none,
+		aboveskip=3mm,
+		belowskip=3mm,
+		framexleftmargin=6pt,  xleftmargin=6pt,
+		framexrightmargin=6pt, xrightmargin=6pt, 
+		framextopmargin=6pt,
+		framexbottommargin=6pt,
+		frame=tb, framerule=0pt,
+		showstringspaces=false,
+		columns=flexible,
+		breaklines=true,
+		breakatwhitespace=true,
+		tabsize=3,
+		% Language settings
+		numberstyle=\tiny\color{gray},
+		commentstyle=\color{dkgreen},
+		stringstyle=\color{red},
+		% Classes
+		classoffset=0,
+		keywordstyle=\color{gigas},
+		% Classes
+		classoffset=1,
+		keywords={System, String},
+		keywordstyle=\color{deepviolet}\itshape,
+	}
+	\setkeys{lst}{#1}
+}{}
+
+\newcommand{\asdf}[1]{\textbf{#1}}
+
 %% Bash code
-\newenvironment{bashcode}{
-	\begin{center}\itshape\bfseries
-}
-{
-	\end{center}
-}
+\newenvironment{bashcode}{\endgraf\centering\itshape\bfseries}{}
 
 
 % Style highlighting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,15 +240,15 @@
 	classoffset=0,
 	keywords={typeof, new, true, false, catch, function, return,
 		null, catch, switch, var, if, in, while, do, else, case,
-		break, const, let, class, export, boolean, throw, implements,
+		break, const, let, class, export, throw, implements,
 		default, import, this, extends,
 		%
-		interface, type, constructor, public, private},
+		interface, type, constructor, public, private, declare, module},
 	% Classes
 	classoffset=1,
 	keywords={Math, BrowserWindow, Menu, MenuItem, Rx, Observable, Date,
 		%
-		string},
+		string, Array, number, boolean, Buffer, void, any, Store},
 	% Comments
 	comment=[l]{//},
 	morecomment=[s]{/*}{*/},

@@ -47,3 +47,14 @@
 \newcommand{\SUMhyp}[2]{
  {\sffamily HYPOTHESIS #1 : #2} 
 }
+
+\newcommand{\icon}[2]{%
+	$\null\mathsurround=0pt$%
+	\includegraphics[height=\dimexpr\fontdimen22\textfont2+1ex\relax]{#1}
+	\textbf{#2.}\space}
+
+\def\CC{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.3ex}{\small\bf ++}\space}}
+
+\newcommand{\approxtext}[1][]{%
+	\ensuremath{\stackrel{\text{#1}}{\approx}}
+}

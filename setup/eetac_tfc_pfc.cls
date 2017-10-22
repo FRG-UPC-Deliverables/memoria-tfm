@@ -566,7 +566,7 @@
 
 % Table of figures and table of tables
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand{\l@figure}{\@dottedtocline{1}{0em}{2em}}
+\renewcommand{\l@figure}{\@dottedtocline{1}{1.6em}{2.35em}}
 \renewcommand{\l@table}{\l@figure}
 
 %%%% specifies the highest level appearing in the table of contents
