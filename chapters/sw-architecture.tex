@@ -3,6 +3,7 @@
 
 % TODO: En este apartado empiezo a poner diagramas, los pongo a color o
 % mejor en blanco y negro??
+% TODO: a color (no creo que tengamos que imprimir)
 
 “Most systems work better they are kept simple rather than complicated”
 \cite{kiss-wiki}. This is the main statement of the KISS principle, acronym for
@@ -19,6 +20,7 @@ applications appeared, this model was applied in many important projects
 like \href{https://support.microsoft.com}{Microsoft Support}. 
 
 % TODO: NO SE COMO PONER UNA WEB COMO EJEMPLO: como cita o hipervinculo??
+% TODO: como cita.
 
 \begin{figure}[htb]
 	\begin{center}
@@ -50,7 +52,7 @@ generate unexpected loops as Figure \ref{F:mvc-complex} proves.
 
 \section{Flux architecture}
 
-In order solve the MVC scalability problem, Facebook launched Flux, represented
+In order to solve the MVC scalability problem, Facebook launched Flux, represented
 on Figure \ref{F:flux}. Now views are watching a plain object (state) saved
 inside the store. Actions are also plain objects that are dispatched changing
 the current stored state.
@@ -69,7 +71,7 @@ must not call any action.
 
 \section{React}
 
-React is an implementation of Flux view block. It is a component-based 
+React is an implementation of the Flux view block. It is a component-based 
 JavaScript library to build user interfaces \cite{react-web}. Each React
 component can have input properties, state, and must implement a render
 function. Moreover, to make things easier, React supports JSX which are
@@ -259,7 +261,7 @@ shown on Listing \ref{L:redux-selector}.
 
 \subsection{Store}
 
-To create a store is as easy as provide the root reducer and the initial state.
+Creating a store is as easy as providing the root reducer and the initial state.
 Then actions can be dispatched and a function can be subscribed to detect any
 state change.
 
@@ -297,7 +299,7 @@ and current time values. Finally, this difference is printed on a text element.
 
 Since Redux's reducers must be pure functions and there are many complex
 behaviors that have to be chained when some actions are produced, Redux
-Observables provides a middleware that handles action streams using rxjs
+Observables provide a middleware that handles action streams using rxjs
 observables. The observable is executed after the action has been reduced.
 So Redux architecture (Figure \ref{F:redux-architecture}) must be complemented 
 with Figure \ref{F:redux-observables-architecture}.
