@@ -163,12 +163,38 @@
 %l'EETAC, especialment l'apartat ``Requeriments del treball''.  \end{resum}
 
 %%% Resum en anglès
-\begin{overview}{11cm} This document contains guidelines for writing your
-TFC/PFC. However, you should also take into consideration the standards
-established in the document Normativa del treball de fi de carrera (TFC) i del
-projecte de fi de carrera (PFC), paying special attention to the section
-Requeriments del treball, as this document has been approved by the EETAC
-Standing Committee \end{overview}
+\begin{overview}{11cm}
+The amount of digital information is growing every day. Due to its persistence
+is often used as evidence on judgements. Digital forensics is a science that is
+intended to found this proofs in order to make a reconstruction of the facts. 
+
+There are many tools to extract this information. Two well-known user
+interfaces are \textit{EnCase Forensic} and \textit{Autopsy}. But there are no
+open-source user-friendly interfaces that can run over \textit{Windows}, 
+\textit{Linux} and \textit{Max OS}.
+
+Those softwares offer the possibility to see the file system of an image
+without modifying it (to preserve proof integrity), recover deleted files,
+generate timelines and even search functions to find clues that helps their
+cases. In this project a new software, \textit{Img-spy}, was created to perform
+those operations.
+
+To do so, \textit{The Sleuth Kit} C library was used to build a wrapper called
+\textit{The Sleuth Kit JavaScript}. This wrapper allows JavaScript to perform a
+digital forensics analysis.
+
+But for an application, is not enough have useful functionalities, so it
+must be comfortable for the user. This obvious purpose is very difficult to
+achieve because users have different preferences. Then, \textit{Img-spy} user
+interface is intended to be customizable, giving the option to adjust the size
+of the interface panels and supporting multiple themes.
+
+This software is also a good example of how a scalable application can be
+build using flux-like architecture based on \textit{React-Redux} packages.
+Those modern libraries create a unidirectional data flow that starts with
+actions that modifies the current state of the application and it affects to
+the view of the user interface.
+\end{overview}
 
 
 %NOTA: En cas d'utilitzar l'espanyol com a idioma principal del document, el
