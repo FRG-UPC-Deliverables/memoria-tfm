@@ -22,7 +22,7 @@ recovered.
 \end{figure}
 
 Once the case to work is picked, the main application window (Figure
-\ref{F:img-spy-case-window}) is shown. This one contains tree tools needed to
+\ref{F:img-spy-case-window}) is shown. This one contains three tools needed to
 proceed with the analysis. Each tool is represented with an icon.
 
 \begin{figure}[htb]
@@ -46,10 +46,10 @@ proceed with the analysis. Each tool is represented with an icon.
 
 \end{itemize}
 
-One objective of the project was to be a user-friendly user interface. Many
+One of the main objectives of the project is to get a user-friendly user interface for the typical digital forensics activities. Many
 people find inconvenient to work many hours with a bright screen while others
 prefer to have more light in order to see things clearly. For that reason
-multiple themes are supported. (Figure \ref{F:img-spy-multi-theme}). 
+multiple themes are supported (see Figure \ref{F:img-spy-multi-theme}). 
 
 \begin{figure}[htb]
 	\begin{center}
@@ -89,13 +89,13 @@ The \textit{Explorer} is always watching case folder file system and each
 change is detected launching an action to updates the application global state
 refreshing the case structure tree. 
 
-If one file have the extension \textit{.dd}, function tsk-js analysis is
+If one file has the extension \textit{.dd}, function tsk-js analysis is
 executed in parallel and the image digest is computed. Once the proper hash is
 provided on the image properties panel (Chapter \ref{S:explorer-properties}),
 the content inside the image is added into the case tree using tsk-js list
 function. Items in red color are deleted.
 
-Each item tree have a context menu. All files can be opened with the OS
+Each item tree has a context menu. All files can be opened with the OS
 preferred applications with the open option.
 
 Folders inside an image also have an option to generate a timeline. In case of
@@ -114,7 +114,7 @@ Finally, files have an option to export its content using tsk-js get function.
 \end{wrapfigure}
 
 This panel (Figure \ref{F:img-spy-explorer-properties}) shows the properties of
-the item selected on case structure (Chapter \ref{S:case-structure}).
+the item selected on the case structure (Chapter \ref{S:case-structure}).
 Image properties are:
 
 \begin{description}
@@ -129,7 +129,7 @@ Image properties are:
 
 \subsubsection{Active item}
 
-It displays the information of current selected item on case structure (Chapter
+It displays the information of current selected item on the case structure (Chapter
 \ref{S:case-structure}).
 
 \begin{figure}[htb]
@@ -166,7 +166,7 @@ On the other hand, Figure \ref{F:img-spy-active-folder} shows the active panel
 when a file is selected. Since the content type of the files is not known,
 two type of views are supported: hexadecimal and string. It only displays
 the first thousand characters to not freeze the user interface. A future line
-of the project is to implement a view more functionality.
+of the project is to implement a view with more functionality.
 
 \subsubsection{Terminal}
 
@@ -187,7 +187,7 @@ Figure \ref{F:img-spy-explorer-terminal} shows some logs.
 \subsection{Timeline}
 \label{S:timeline}
 
-The second tool, \textit{Timline}, generates a table with all file system
+The second tool, \textit{Timline}, generates a table with all the file system
 actions. Case structure context menu from \textit{Explorer} (Chapter
 \ref{F:img-spy-explorer-case-structure}) has an option to generate those
 tables. The function tsk-js timeline is executed to get this information.
@@ -257,12 +257,12 @@ search path.
 \begin{description}
 	\item[Needle] Text that will be looked inside the image.
 	\item[Search path] This field is not editable. It has the path of the
-	selected item on case structure (Chapter \ref{S:case-structure}).
+	selected item on the case structure (Chapter \ref{S:case-structure}).
 \end{description}
 
 When user clicks search button, the search process starts to look for matches
 on background and each time a result is retrieved, it appears on the search
-result's table.
+results table.
 
 \subsubsection{Search list}
 
@@ -274,7 +274,7 @@ result's table.
 	\label{F:img-spy-search-list}
 \end{wrapfigure}
 
-All queried search appears on search list (Figure
+All queried search appear on the search list (Figure
 \ref{F:img-spy-search-list}). When the look up finishes, it is stored on the
 current case settings and thus auto-saved.
 
@@ -287,7 +287,7 @@ The results of the selected search item are displayed on a table inside this
 panel (Figure \ref{F:img-spy-search-results}). This table, as \textit{Timeline}
 table, also supports custom order by clicking the headers.
 
-The first column shows the path of the files that contains the needle and 
+The first column shows the path of the files that contain the needle and 
 how many times it appears. If the toggle button is clicked, the row
 uncollapses and shows the context and index where the string if appears inside
 this file.
@@ -334,7 +334,7 @@ system changes. It uses Node.js package \textit{"chokidar"} to watch those
 changes efficiently. Watcher is bound using \textit{"componentWillMount"}
 lifecycle function.
 
-Then, several Redux-Observables epics chain actions, such as, launch tsk-js
+Then, several Redux-Observables epics chain actions, such as launching tsk-js
 analysis function if the payload contains an image.
 
 \subsection{Auto-save settings}
