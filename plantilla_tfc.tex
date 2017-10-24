@@ -169,31 +169,29 @@ is often used as evidence on judgements. Digital forensics is a science that is
 intended to found this proofs in order to make a reconstruction of the facts. 
 
 There are many tools to extract this information. Two well-known user
-interfaces are \textit{EnCase Forensic} and \textit{Autopsy}. But there are no
-open-source user-friendly interfaces that can run over \textit{Windows}, 
-\textit{Linux} and \textit{Max OS}.
-
-Those softwares offer the possibility to see the file system of an image
+interfaces are \textit{EnCase Forensic} and \textit{Autopsy}. Those softwares offer the possibility to see the file system of an image
 without modifying it (to preserve proof integrity), recover deleted files,
 generate timelines and even search functions to find clues that helps their
-cases. In this project a new software, \textit{Img-spy}, was created to perform
-those operations.
+cases.
 
-To do so, \textit{The Sleuth Kit} C library was used to build a wrapper called
-\textit{The Sleuth Kit JavaScript}. This wrapper allows JavaScript to perform a
-digital forensics analysis.
+However, there are no
+open-source user-friendly interfaces that can run over \textit{Windows}, 
+\textit{Linux} and \textit{Max OS}.
+In this project a new software, \textit{Img-spy}, was created to perform
+those operations regardless of the operating system.
 
-But for an application, is not enough have useful functionalities, so it
-must be comfortable for the user. This obvious purpose is very difficult to
+With such a goal, in this project we have built \textit{The Sleuth Kit JavaScript} wrapper, which provides a Javascript interface to the widely-use cross-platform open-source \textit{Sleuth Kit} C library.  With such a wrapper, JavaScript can be used to develop new applications for digital forensics analysis.
+
+Besides being multi-platform, this project has been targeted to create a user-friendly framework for the usual digital forensics' work flow. 
+This obvious purpose is very difficult to
 achieve because users have different preferences. Then, \textit{Img-spy} user
 interface is intended to be customizable, giving the option to adjust the size
 of the interface panels and supporting multiple themes.
 
-This software is also a good example of how a scalable application can be
-build using flux-like architecture based on \textit{React-Redux} packages.
+The results of this project are a good example of how a scalable application can be
+built using flux-like architecture based on \textit{React-Redux} packages.
 Those modern libraries create a unidirectional data flow that starts with
-actions that modifies the current state of the application and it affects to
-the view of the user interface.
+actions that modify the current state of the application and so affect the views of the user interface.
 \end{overview}
 
 
