@@ -27,7 +27,7 @@ proceed with the analysis. Each tool is represented with an icon.
 
 \begin{figure}[htb]
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{./figures/img-spy-dark.png}
+		\includegraphics[width=0.8\textwidth]{./figures/img-spy-dark.png}
 		\caption{Img-spy case window}
 		\label{F:img-spy-case-window}
 	\end{center}
@@ -46,18 +46,21 @@ proceed with the analysis. Each tool is represented with an icon.
 
 \end{itemize}
 
-One of the main objectives of the project is to get a user-friendly user interface for the typical digital forensics activities. Many
-people find inconvenient to work many hours with a bright screen while others
-prefer to have more light in order to see things clearly. For that reason
-multiple themes are supported (see Figure \ref{F:img-spy-multi-theme}). 
+One of the main objectives of the project is to get a user-friendly user
+interface for the typical digital forensics activities. Many people find
+inconvenient to work many hours with a bright screen while others prefer to
+have more light in order to see things clearly. For that reason multiple themes
+are supported (see Figure \ref{F:img-spy-multi-theme}). 
 
 \begin{figure}[htb]
 	\begin{center}
-		\begin{subfigmatrix}{2}
+		\begin{subfigmatrix}{1}
 			\subfigure[Dark theme]
-			{\includegraphics{./figures/img-spy-dark.png}\label{SF:S1}} 
+			{\includegraphics[width=0.75\textwidth]
+				{./figures/img-spy-dark.png}\label{SF:S1}} 
 			\subfigure[Light theme]
-			{\includegraphics{./figures/img-spy-light.png}\label{SF:S1}}
+			{\includegraphics[width=0.75\textwidth]
+				{./figures/img-spy-light.png}\label{SF:S1}}
 		\end{subfigmatrix}
 		\caption{Img-spy  multiple themes support}
 		\label{F:img-spy-multi-theme}
@@ -78,7 +81,7 @@ interface.
 All folders inside the selected case folder are shown using a tree in this 
 panel (Figure \ref{F:img-spy-explorer-case-structure}).
 
-\begin{wrapfigure}[18]{L}{4.9cm}
+\begin{wrapfigure}[17]{L}{4.9cm}
 	\includegraphics[width=4.4cm]{./figures/explorer-case-structure.png}
 	\centering
 	\caption{Explorer case structure panel}
@@ -129,8 +132,8 @@ Image properties are:
 
 \subsubsection{Active item}
 
-It displays the information of current selected item on the case structure (Chapter
-\ref{S:case-structure}).
+It displays the information of current selected item on the case structure
+(Chapter \ref{S:case-structure}).
 
 \begin{figure}[htb]
 	\begin{center}
@@ -162,7 +165,7 @@ current active item will be the clicked one, updating also the case structure
 	\end{center}
 \end{figure}
 
-On the other hand, Figure \ref{F:img-spy-active-folder} shows the active panel
+On the other hand, Figure \ref{F:img-spy-active-file} shows the active panel
 when a file is selected. Since the content type of the files is not known,
 two type of views are supported: hexadecimal and string. It only displays
 the first thousand characters to not freeze the user interface. A future line
@@ -241,6 +244,8 @@ user look for a string inside the image. This execution is executed in parallel
 and when all results are retrieved, they are saved on settings, as
 \textit{Timeline} (see Chapter \ref{S:timeline}).
 
+\clearpage
+
 \subsubsection{Search from}
 
 \begin{wrapfigure}[10]{L}{5.5cm}
@@ -287,11 +292,6 @@ The results of the selected search item are displayed on a table inside this
 panel (Figure \ref{F:img-spy-search-results}). This table, as \textit{Timeline}
 table, also supports custom order by clicking the headers.
 
-The first column shows the path of the files that contain the needle and 
-how many times it appears. If the toggle button is clicked, the row
-uncollapses and shows the context and index where the string if appears inside
-this file.
-
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[width=0.8\textwidth]
@@ -300,6 +300,12 @@ this file.
 		\label{F:img-spy-search-results}
 	\end{center}
 \end{figure}
+
+The first column shows the path of the files that contain the needle and 
+how many times it appears. If the toggle button is clicked, the row
+uncollapses and shows the context and index where the string if appears inside
+this file.
+
 
 \section{Key developments}
 
@@ -388,13 +394,10 @@ order by, pagination and row aggregation functionalities implemented.
 
 \section{Code quality analysis}
 
-% TODO: No se si es interesante poner esto aunque creo que da una idea de como
-% esta hecho si crees que esta bien explico cada valor si esta bien o que 
-% se puede mejorar
-
-To check if the project is scalable enough, some code quality metrics are 
-calculated. The command used is \textit{sloc}.
-
+There are many ways to check the code quality. One tool that can be used is 
+\textit{sloc}. It can generate detailed information about files inside the 
+project folder. Also, using a Regex, some files can be omitted. The following
+command generates a CSV with this information.
 
 \begin{terminal}[
 	caption=Code quality CSV extraction using sloc,
@@ -407,32 +410,40 @@ calculated. The command used is \textit{sloc}.
 
 \end{terminal}
 
-With this information, some interesting metrics can be computed. Table
+Using this CSV, some interesting metrics can be computed. Table
+\ref{T:code-analysis-metrics} show some examples. Expected values are retrieved
+empirically from some famous softwares \cite{programming-practices}.
+
 
 \begin{table}[htb]
 \begin{center}
 \begin{tabular}{|l|l|l|}
+
 \hline
-{\bf Metric }	& {\bf Value} & {\bf Expected} \\ \hline \hline
+{\bf Metric }	& {\bf Value} & {\bf Expected} \\ \hline
+\hline
 Total files & 190 & - \\ \hline
 Source lines & 8779 & - \\ \hline
 \hline
-
-Max. source lines per file & 301 & \textless\space\text{300} \\ \hline
-Min. source lines per file & 1 & \textgreater\space\text{1} \\ \hline
-Avg. source lines per file & \approxtext\text{46} & \textless\space\text{100} \\ \hline
+Max. source lines per file & 301 & \textless\space\text{500} \\ \hline
+Avg. source lines per file & \approxtext\text{46} & \textless\space\text{64}
+\\ \hline
+Min. source lines per file & 1 & \textgreater\space\text{4} \\ \hline
 \hline
-Files without comments & 70.5\% & \textless\space\text{20\%} \\ \hline
-Comments / Source & 2\% & \textgreater\space\text{5\%} \\ \hline
-Avg. code blocks size & 4 & - \\ \hline
+Files without comments & 70.5\% & - \\ \hline
+Comments / Source & 2\% & - \\ \hline
+Avg. consecutive lines & 4 & - \\ \hline
 \end{tabular}
 \caption{Code analysis metrics}
 \label{T:code-analysis-metrics}
 \end{center}
 \end{table}
 
+The fist group of parameters give information about the size of the project.
+Then, regarding lines per file, the project is fulfilling the quality
+expectations. However, the file with 301 should be restructured to improve even
+more the code quality.
 
-
-
-
-
+The third block clearly show that comments must be added. Nevertheless, the 
+average number of lines without space is small. That also improves the code 
+readability. 
